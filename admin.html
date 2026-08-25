@@ -171,7 +171,7 @@
         <!-- Brand text (3-line layout) -->
         <div class="flex flex-col text-start">
           <span class="text-xs font-black tracking-tight text-brand-600 dark:text-brand-400 leading-none">LAUNDRY</span>
-          <span class="text-[8px] font-extrabold tracking-widest text-slate-650 dark:text-slate-300 leading-none mt-0.5">& DRY CLEANING</span>
+          <span class="text-[8px] font-extrabold tracking-widest text-slate-600 dark:text-slate-300 leading-none mt-0.5">& DRY CLEANING</span>
           <span class="text-[7px] font-medium uppercase tracking-widest text-slate-500 dark:text-slate-400 leading-none mt-0.5">SERVICE</span>
         </div>
       </a>
@@ -189,10 +189,10 @@
 
       <!-- User Dropdown Status Pill -->
       <div class="relative" id="user-dropdown-wrapper">
-        <button onclick="toggleUserDropdown(event)" class="flex items-center gap-2.5 bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-full px-3 py-1.5 text-xs text-start hover:bg-slate-100 dark:hover:bg-slate-850 transition-colors focus:outline-none" id="user-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+        <button onclick="toggleUserDropdown(event)" class="flex items-center gap-2.5 bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-full px-3 py-1.5 text-xs text-start hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none" id="user-dropdown-btn" aria-expanded="false" aria-haspopup="true">
           <div class="w-6.5 h-6.5 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-[10px] flex-shrink-0">AD</div>
           <div class="hidden sm:block">
-            <h4 class="text-[10px] font-bold text-slate-850 dark:text-slate-200 leading-none">Admin Dispatch</h4>
+            <h4 class="text-[10px] font-bold text-slate-800 dark:text-slate-200 leading-none">Admin Dispatch</h4>
           </div>
           <svg class="w-3 h-3 text-slate-400 transition-transform duration-200" id="user-dropdown-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
         </button>
@@ -207,9 +207,9 @@
           </div>
           <div class="border-t border-slate-100 dark:border-slate-700 my-1"></div>
           <!-- Menu Actions -->
-          <button onclick="switchScreen('overview', 'Dashboard Overview', 'nav-overview'); closeUserDropdown();" class="w-full text-start px-4 py-2 text-xs text-slate-700 dark:text-slate-350 hover:bg-brand-50 hover:text-brand-600 dark:hover:bg-slate-700 dark:hover:text-brand-400 transition-colors">Overview</button>
-          <button onclick="switchScreen('customers', 'Customer Management', 'nav-customers'); closeUserDropdown();" class="w-full text-start px-4 py-2 text-xs text-slate-700 dark:text-slate-350 hover:bg-brand-50 hover:text-brand-600 dark:hover:bg-slate-700 dark:hover:text-brand-400 transition-colors">Manage Customers</button>
-          <a href="index.html" class="block px-4 py-2 text-xs text-slate-700 dark:text-slate-350 hover:bg-brand-50 hover:text-brand-600 dark:hover:bg-slate-700 dark:hover:text-brand-400 transition-colors">Back to Home</a>
+          <button onclick="switchScreen('overview', 'Dashboard Overview', 'nav-overview'); closeUserDropdown();" class="w-full text-start px-4 py-2 text-xs text-slate-700 dark:text-slate-300 hover:bg-brand-50 hover:text-brand-600 dark:hover:bg-slate-700 dark:hover:text-brand-400 transition-colors">Overview</button>
+          <button onclick="switchScreen('customers', 'Customer Management', 'nav-customers'); closeUserDropdown();" class="w-full text-start px-4 py-2 text-xs text-slate-700 dark:text-slate-300 hover:bg-brand-50 hover:text-brand-600 dark:hover:bg-slate-700 dark:hover:text-brand-400 transition-colors">Manage Customers</button>
+          <a href="index.html" class="block px-4 py-2 text-xs text-slate-700 dark:text-slate-300 hover:bg-brand-50 hover:text-brand-600 dark:hover:bg-slate-700 dark:hover:text-brand-400 transition-colors">Back to Home</a>
           <div class="border-t border-slate-100 dark:border-slate-700 my-1"></div>
           <a href="login.html" class="block px-4 py-2 text-xs text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors">Logout</a>
         </div>
@@ -247,7 +247,7 @@
 
         <div class="flex gap-2 items-center">
           <!-- Theme Toggle -->
-          <button id="dark-mode-btn" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-500 dark:text-slate-400 hover:text-slate-805 dark:hover:text-white transition-colors focus:outline-none" aria-label="Toggle Theme">
+          <button id="dark-mode-btn" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white transition-colors focus:outline-none" aria-label="Toggle Theme">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
               <circle cx="12" cy="12" r="4" />
               <line x1="12" y1="1" x2="12" y2="3" />
@@ -261,7 +261,7 @@
             </svg>
           </button>
           <!-- Direction Toggle -->
-          <button id="rtl-mode-btn" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-500 dark:text-slate-400 hover:text-slate-805 dark:hover:text-white transition-colors focus:outline-none" aria-label="Toggle RTL">
+          <button id="rtl-mode-btn" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white transition-colors focus:outline-none" aria-label="Toggle RTL">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
               <path d="M4 8h16M16 4l4 4-4 4M20 16H4M8 12l-4 4 4 4" />
             </svg>
@@ -375,7 +375,7 @@
       </nav>
 
       <!-- Sidebar Footer / Logout -->
-      <div class="p-6 border-t border-slate-100 dark:border-slate-850 flex items-center justify-between">
+      <div class="p-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
         <div class="flex items-center gap-3">
           <div class="w-9 h-9 rounded-xl bg-brand-500/10 text-brand-600 dark:text-brand-400 flex items-center justify-center font-bold text-xs">AD</div>
           <div class="text-start">
@@ -394,7 +394,7 @@
     <div class="flex-grow flex flex-col min-w-0">
       
       <!-- Viewport Breadcrumbs -->
-      <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-850 flex justify-start items-center text-xs text-slate-400 bg-white dark:bg-[#0b0c16]">
+      <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex justify-start items-center text-xs text-slate-400 bg-white dark:bg-[#0b0c16]">
         <span class="font-semibold text-slate-800 dark:text-slate-200 uppercase tracking-wider">Admin Portal</span>
         <span class="mx-2">/</span>
         <span id="breadcrumb-text" class="text-brand-500 font-bold">Dashboard Overview</span>
@@ -423,15 +423,15 @@
               <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="p-6 bg-slate-50 dark:bg-slate-900/60 rounded-2xl border border-slate-100 dark:border-slate-800">
                   <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Registered Users</span>
-                  <span class="text-3xl font-black text-slate-850 dark:text-white block">1,482</span>
+                  <span class="text-3xl font-black text-slate-800 dark:text-white block">1,482</span>
                 </div>
                 <div class="p-6 bg-slate-50 dark:bg-slate-900/60 rounded-2xl border border-slate-100 dark:border-slate-800">
                   <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">New This Week</span>
-                  <span class="text-3xl font-black text-slate-850 dark:text-white block">+28</span>
+                  <span class="text-3xl font-black text-slate-800 dark:text-white block">+28</span>
                 </div>
                 <div class="p-6 bg-slate-50 dark:bg-slate-900/60 rounded-2xl border border-slate-100 dark:border-slate-800">
                   <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Active Subscribers</span>
-                  <span class="text-3xl font-black text-slate-850 dark:text-white block">854</span>
+                  <span class="text-3xl font-black text-slate-800 dark:text-white block">854</span>
                 </div>
               </div>
             </div>
@@ -591,7 +591,7 @@
                 <div class="flex justify-between items-center">
                   <div>
                     <h4 class="font-bold text-slate-800 dark:text-slate-200">#PCK-102 (John Doe)</h4>
-                    <span class="text-[10px] text-slate-450 block mt-0.5">Time: 10:00 AM - 12:00 PM | Bags: 2</span>
+                    <span class="text-[10px] text-slate-400 block mt-0.5">Time: 10:00 AM - 12:00 PM | Bags: 2</span>
                   </div>
                   <span class="px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-brand-50 dark:bg-brand-950/20 text-brand-600 dark:text-brand-400">Assigned: Courier Alpha</span>
                 </div>
@@ -623,8 +623,8 @@
               <div class="p-4 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800 text-xs">
                 <div class="flex justify-between items-center">
                   <div>
-                    <h4 class="font-bold text-slate-850 dark:text-slate-205">#DLV-853 (Jane Doe)</h4>
-                    <span class="text-[10px] text-slate-450 block mt-0.5">Address: 204 Zion Road, Sector A</span>
+                    <h4 class="font-bold text-slate-800 dark:text-slate-200">#DLV-853 (Jane Doe)</h4>
+                    <span class="text-[10px] text-slate-400 block mt-0.5">Address: 204 Zion Road, Sector A</span>
                   </div>
                   <span class="px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-brand-500/10 text-brand-600 dark:text-brand-400">In Transit</span>
                 </div>
@@ -753,7 +753,7 @@
               <div class="flex justify-between items-center text-xs p-3.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 rounded-2xl">
                 <div>
                   <h4 class="font-bold text-slate-800 dark:text-slate-200">#INV-9482</h4>
-                  <span class="text-[10px] text-slate-450 block">Customer: John Doe | Value: $24.00</span>
+                  <span class="text-[10px] text-slate-400 block">Customer: John Doe | Value: $24.00</span>
                 </div>
                 <button onclick="alert('Downloading invoice INV-9482...')" class="px-3.5 py-2 bg-brand-600 text-white font-bold rounded-xl hover:bg-brand-700">Get PDF</button>
               </div>
@@ -785,7 +785,7 @@
               <div class="p-3.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 rounded-2xl text-xs flex justify-between items-center">
                 <div>
                   <span class="block text-[9px] text-slate-400 uppercase font-bold">Aug 25, 2026 - INV-9482</span>
-                  <span class="font-bold text-slate-850 dark:text-slate-100">John Doe (Credit Card)</span>
+                  <span class="font-bold text-slate-800 dark:text-slate-100">John Doe (Credit Card)</span>
                 </div>
                 <span class="font-extrabold text-emerald-500">+$24.00</span>
               </div>
@@ -836,7 +836,7 @@
                 </thead>
                 <tbody id="pincodes-table-body" class="divide-y divide-slate-50 dark:divide-slate-800">
                   <tr>
-                    <td class="py-4 font-bold text-slate-850 dark:text-slate-200">110022</td>
+                    <td class="py-4 font-bold text-slate-800 dark:text-slate-200">110022</td>
                     <td class="py-4 font-bold text-emerald-500">Serviced</td>
                   </tr>
                 </tbody>
@@ -866,7 +866,7 @@
               <h3 class="text-sm font-bold mb-4 uppercase">Automated Pickup SMS / Emails</h3>
               <div class="p-3.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 rounded-2xl text-xs space-y-1">
                 <span class="block text-[9px] text-slate-400 font-bold uppercase">Template: Pickup Assigned</span>
-                <p class="font-semibold text-slate-700 dark:text-slate-350">"Hello [Name], courier [Courier] is assigned to collect your laundry garments today."</p>
+                <p class="font-semibold text-slate-700 dark:text-slate-300">"Hello [Name], courier [Courier] is assigned to collect your laundry garments today."</p>
               </div>
             </div>
           </div>
@@ -1057,7 +1057,7 @@
       const tbody = document.getElementById('pincodes-table-body');
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td class="py-4 font-bold text-slate-850 dark:text-slate-200">${pin}</td>
+        <td class="py-4 font-bold text-slate-800 dark:text-slate-200">${pin}</td>
         <td class="py-4 font-bold text-emerald-500">Serviced</td>
       `;
       tbody.appendChild(tr);

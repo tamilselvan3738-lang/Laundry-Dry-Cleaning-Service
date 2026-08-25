@@ -323,6 +323,22 @@
     <!-- Drawer Footer Actions -->
     <div class="pt-6 border-t border-slate-100 dark:border-slate-700 space-y-4">
       
+      <!-- Dark Mode Toggle inside mobile menu -->
+      <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-900/50 p-3 rounded-xl border border-slate-100 dark:border-slate-700">
+        <span class="text-sm font-semibold text-slate-600 dark:text-slate-400">Appearance (Dark Mode)</span>
+        <button id="drawer-dark-mode-btn" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200" aria-label="Toggle Dark Mode">
+          <!-- Drawer Moon Icon -->
+          <svg id="drawer-moon-icon" class="w-5 h-5 transition-transform duration-300 hover:rotate-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+          <!-- Drawer Sun Icon -->
+          <svg id="drawer-sun-icon" class="hidden w-5 h-5 text-slate-300 transition-transform duration-300 hover:rotate-45" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+          </svg>
+        </button>
+      </div>
+
       <!-- RTL Toggle inside mobile menu -->
       <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-900/50 p-3 rounded-xl border border-slate-100 dark:border-slate-700">
         <span class="text-sm font-semibold text-slate-600 dark:text-slate-400">Layout Direction (RTL)</span>
@@ -369,7 +385,7 @@
               Professional Care <br class="hidden sm:inline">
               For Every <span class="text-primary-400">Garment Category</span>
             </h1>
-            <p class="text-sm sm:text-base text-slate-350 leading-relaxed max-w-xl">
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl">
               From organic wash cycles and botanical fabric softening to chemical-free dry cleaning and hand-treated leather restorations, our specialized facilities are engineered to extend the life of your wardrobe.
             </p>
             <div class="flex flex-wrap gap-3 pt-2">
@@ -537,7 +553,7 @@
             </p>
 
             <div class="space-y-4">
-              <div class="flex gap-4 p-4 rounded-xl border border-slate-150 dark:border-slate-800/80 bg-slate-50/40 dark:bg-slate-800/20">
+              <div class="flex gap-4 p-4 rounded-xl border border-slate-100 dark:border-slate-800/80 bg-slate-50/40 dark:bg-slate-800/20">
                 <div class="w-10 h-10 rounded-xl bg-sky-100 dark:bg-sky-950/50 flex items-center justify-center text-sky-600 dark:text-sky-400 flex-shrink-0">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                 </div>
@@ -547,7 +563,7 @@
                 </div>
               </div>
 
-              <div class="flex gap-4 p-4 rounded-xl border border-slate-150 dark:border-slate-800/80 bg-slate-50/40 dark:bg-slate-800/20">
+              <div class="flex gap-4 p-4 rounded-xl border border-slate-100 dark:border-slate-800/80 bg-slate-50/40 dark:bg-slate-800/20">
                 <div class="w-10 h-10 rounded-xl bg-primary-100 dark:bg-primary-950/50 flex items-center justify-center text-primary-600 dark:text-primary-400 flex-shrink-0">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.003 9.003 0 008.354-5.646z" /></svg>
                 </div>
@@ -563,7 +579,7 @@
           <div class="lg:col-span-5 flex justify-center">
             <div class="relative w-full max-w-sm">
               <div class="absolute -top-4 -start-4 w-72 h-72 border-2 border-dashed border-sky-400/20 dark:border-sky-500/10 rounded-3xl"></div>
-              <div class="relative bg-white dark:bg-slate-800 rounded-3xl p-3 shadow-xl border border-slate-250 dark:border-slate-700">
+              <div class="relative bg-white dark:bg-slate-800 rounded-3xl p-3 shadow-xl border border-slate-200 dark:border-slate-700">
                 <img src="images/services_steam_press.jpg" alt="Ironing shirt close up" class="w-full h-80 object-cover rounded-2xl" />
               </div>
             </div>
@@ -632,15 +648,15 @@
             </p>
 
             <ul class="space-y-3.5">
-              <li class="flex items-center gap-3 text-xs text-slate-650 dark:text-slate-350">
+              <li class="flex items-center gap-3 text-xs text-slate-600 dark:text-slate-300">
                 <span class="p-1 rounded bg-indigo-100 dark:bg-indigo-950 text-indigo-650 dark:text-indigo-400">&check;</span>
                 <span>Mulberry Silk: Hand-washed in pH-neutral water using botanical extract soaps.</span>
               </li>
-              <li class="flex items-center gap-3 text-xs text-slate-650 dark:text-slate-350">
+              <li class="flex items-center gap-3 text-xs text-slate-600 dark:text-slate-300">
                 <span class="p-1 rounded bg-indigo-100 dark:bg-indigo-950 text-indigo-650 dark:text-indigo-400">&check;</span>
                 <span>Pure Cashmere: Cleaned using water softeners and lanolin baths to keep wool fluffy.</span>
               </li>
-              <li class="flex items-center gap-3 text-xs text-slate-650 dark:text-slate-350">
+              <li class="flex items-center gap-3 text-xs text-slate-600 dark:text-slate-300">
                 <span class="p-1 rounded bg-indigo-100 dark:bg-indigo-950 text-indigo-650 dark:text-indigo-400">&check;</span>
                 <span>Beaded & Embroidered Gowns: Cleaned individually by hand inspection, shielding beads from machine drums.</span>
               </li>
@@ -719,15 +735,15 @@
           <div class="p-6 bg-slate-50 dark:bg-slate-800/40 rounded-2xl border border-slate-100 dark:border-slate-800">
             <h4 class="text-sm font-black text-slate-900 dark:text-white mb-4">1. Packing Option</h4>
             <div class="space-y-2">
-              <label class="flex items-center gap-3 text-xs text-slate-655 cursor-pointer">
+              <label class="flex items-center gap-3 text-xs text-slate-700 cursor-pointer">
                 <input type="radio" name="pack-opt" checked class="accent-primary-600 focus:outline-none" />
                 <span>Folded (Standard)</span>
               </label>
-              <label class="flex items-center gap-3 text-xs text-slate-655 cursor-pointer">
+              <label class="flex items-center gap-3 text-xs text-slate-700 cursor-pointer">
                 <input type="radio" name="pack-opt" class="accent-primary-600 focus:outline-none" />
                 <span>Hangers (Eco-Starched)</span>
               </label>
-              <label class="flex items-center gap-3 text-xs text-slate-655 cursor-pointer">
+              <label class="flex items-center gap-3 text-xs text-slate-700 cursor-pointer">
                 <input type="radio" name="pack-opt" class="accent-primary-600 focus:outline-none" />
                 <span>Soft Rolled (Linens/Bags)</span>
               </label>
@@ -737,15 +753,15 @@
           <div class="p-6 bg-slate-50 dark:bg-slate-800/40 rounded-2xl border border-slate-100 dark:border-slate-800">
             <h4 class="text-sm font-black text-slate-900 dark:text-white mb-4">2. Starch Level</h4>
             <div class="space-y-2">
-              <label class="flex items-center gap-3 text-xs text-slate-655 cursor-pointer">
+              <label class="flex items-center gap-3 text-xs text-slate-700 cursor-pointer">
                 <input type="radio" name="starch-opt" checked class="accent-primary-600 focus:outline-none" />
                 <span>No Starch (Soft Finish)</span>
               </label>
-              <label class="flex items-center gap-3 text-xs text-slate-655 cursor-pointer">
+              <label class="flex items-center gap-3 text-xs text-slate-700 cursor-pointer">
                 <input type="radio" name="starch-opt" class="accent-primary-600 focus:outline-none" />
                 <span>Light Starch (Standard)</span>
               </label>
-              <label class="flex items-center gap-3 text-xs text-slate-655 cursor-pointer">
+              <label class="flex items-center gap-3 text-xs text-slate-700 cursor-pointer">
                 <input type="radio" name="starch-opt" class="accent-primary-600 focus:outline-none" />
                 <span>Crisp Starch (Suits/Tuxedos)</span>
               </label>
@@ -755,15 +771,15 @@
           <div class="p-6 bg-slate-50 dark:bg-slate-800/40 rounded-2xl border border-slate-100 dark:border-slate-800">
             <h4 class="text-sm font-black text-slate-900 dark:text-white mb-4">3. Aroma Profile</h4>
             <div class="space-y-2">
-              <label class="flex items-center gap-3 text-xs text-slate-655 cursor-pointer">
+              <label class="flex items-center gap-3 text-xs text-slate-700 cursor-pointer">
                 <input type="radio" name="frag-opt" checked class="accent-primary-600 focus:outline-none" />
                 <span>Scent-Free Hypo-allergenic</span>
               </label>
-              <label class="flex items-center gap-3 text-xs text-slate-655 cursor-pointer">
+              <label class="flex items-center gap-3 text-xs text-slate-700 cursor-pointer">
                 <input type="radio" name="frag-opt" class="accent-primary-600 focus:outline-none" />
                 <span>Lavender Breeze</span>
               </label>
-              <label class="flex items-center gap-3 text-xs text-slate-655 cursor-pointer">
+              <label class="flex items-center gap-3 text-xs text-slate-700 cursor-pointer">
                 <input type="radio" name="frag-opt" class="accent-primary-600 focus:outline-none" />
                 <span>Mountain Fresh Linen</span>
               </label>
@@ -926,6 +942,11 @@
       const moonIcon = document.getElementById("moon-icon");
       const sunIcon = document.getElementById("sun-icon");
       
+      // Drawer Dark Mode elements
+      const drawerDarkModeBtn = document.getElementById("drawer-dark-mode-btn");
+      const drawerMoonIcon = document.getElementById("drawer-moon-icon");
+      const drawerSunIcon = document.getElementById("drawer-sun-icon");
+      
       const rtlModeBtn = document.getElementById("rtl-mode-btn");
       const rtlIcon = document.getElementById("rtl-icon");
       
@@ -1020,6 +1041,10 @@
           sunIcon.classList.remove("hidden");
           mobileMoonIcon.classList.add("hidden");
           mobileSunIcon.classList.remove("hidden");
+          if (drawerMoonIcon && drawerSunIcon) {
+            drawerMoonIcon.classList.add("hidden");
+            drawerSunIcon.classList.remove("hidden");
+          }
           if (badgeTheme) {
             badgeTheme.textContent = "Theme: Dark Mode";
             badgeTheme.className = "inline-flex items-center px-3.5 py-1 rounded-full text-xs font-semibold bg-slate-800 text-slate-100 border border-slate-700";
@@ -1030,6 +1055,10 @@
           sunIcon.classList.add("hidden");
           mobileMoonIcon.classList.remove("hidden");
           mobileSunIcon.classList.add("hidden");
+          if (drawerMoonIcon && drawerSunIcon) {
+            drawerMoonIcon.classList.remove("hidden");
+            drawerSunIcon.classList.add("hidden");
+          }
           if (badgeTheme) {
             badgeTheme.textContent = "Theme: Light Mode";
             badgeTheme.className = "inline-flex items-center px-3.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-800 border border-slate-200";
@@ -1046,6 +1075,9 @@
       // Event Listeners for Dark Mode toggles
       darkModeBtn.addEventListener("click", toggleDarkMode);
       mobileDarkModeBtn.addEventListener("click", toggleDarkMode);
+      if (drawerDarkModeBtn) {
+        drawerDarkModeBtn.addEventListener("click", toggleDarkMode);
+      }
 
       // Initialize Theme
       const savedTheme = localStorage.getItem("theme");

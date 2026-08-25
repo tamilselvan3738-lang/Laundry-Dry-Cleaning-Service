@@ -453,9 +453,9 @@
                 <div class="absolute w-6 h-6 bg-primary-500/20 border border-primary-500 rounded-full animate-ping" style="top: 40%; left: 50%;"></div>
                 <div class="absolute w-3.5 h-3.5 bg-primary-600 border-2 border-white rounded-full shadow-md" style="top: 41%; left: 51%;"></div>
                 
-                <div class="absolute bottom-4 left-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 shadow-md text-start max-w-xs">
+                <div class="absolute bottom-6 start-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 shadow-md text-start max-w-xs">
                   <h5 id="map-pin-title" class="text-xs font-black text-slate-900 dark:text-white">Metro Central Hub</h5>
-                  <p id="map-pin-desc" class="text-[10px] text-slate-500 dark:text-slate-450 mt-0.5">Industrial Sector A, Building 24 (Main plant)</p>
+                  <p id="map-pin-desc" class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">Industrial Sector A, Building 24 (Main plant)</p>
                 </div>
               </div>
             </div>
@@ -635,6 +635,22 @@
     <!-- Drawer Footer Actions -->
     <div class="pt-6 border-t border-slate-100 dark:border-slate-700 space-y-4">
       
+      <!-- Dark Mode Toggle inside mobile menu -->
+      <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-900/50 p-3 rounded-xl border border-slate-100 dark:border-slate-700">
+        <span class="text-sm font-semibold text-slate-600 dark:text-slate-400">Appearance (Dark Mode)</span>
+        <button id="drawer-dark-mode-btn" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200" aria-label="Toggle Dark Mode">
+          <!-- Drawer Moon Icon -->
+          <svg id="drawer-moon-icon" class="w-5 h-5 transition-transform duration-300 hover:rotate-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+          <!-- Drawer Sun Icon -->
+          <svg id="drawer-sun-icon" class="hidden w-5 h-5 text-slate-300 transition-transform duration-300 hover:rotate-45" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+          </svg>
+        </button>
+      </div>
+
       <!-- RTL Toggle inside mobile menu -->
       <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-900/50 p-3 rounded-xl border border-slate-100 dark:border-slate-700">
         <span class="text-sm font-semibold text-slate-600 dark:text-slate-400">Layout Direction (RTL)</span>
@@ -799,6 +815,11 @@
       const moonIcon = document.getElementById("moon-icon");
       const sunIcon = document.getElementById("sun-icon");
       
+      // Drawer Dark Mode elements
+      const drawerDarkModeBtn = document.getElementById("drawer-dark-mode-btn");
+      const drawerMoonIcon = document.getElementById("drawer-moon-icon");
+      const drawerSunIcon = document.getElementById("drawer-sun-icon");
+      
       const rtlModeBtn = document.getElementById("rtl-mode-btn");
       const rtlIcon = document.getElementById("rtl-icon");
       
@@ -893,6 +914,10 @@
           sunIcon.classList.remove("hidden");
           mobileMoonIcon.classList.add("hidden");
           mobileSunIcon.classList.remove("hidden");
+          if (drawerMoonIcon && drawerSunIcon) {
+            drawerMoonIcon.classList.add("hidden");
+            drawerSunIcon.classList.remove("hidden");
+          }
           if (badgeTheme) {
             badgeTheme.textContent = "Theme: Dark Mode";
             badgeTheme.className = "inline-flex items-center px-3.5 py-1 rounded-full text-xs font-semibold bg-slate-800 text-slate-100 border border-slate-700";
@@ -903,6 +928,10 @@
           sunIcon.classList.add("hidden");
           mobileMoonIcon.classList.remove("hidden");
           mobileSunIcon.classList.add("hidden");
+          if (drawerMoonIcon && drawerSunIcon) {
+            drawerMoonIcon.classList.remove("hidden");
+            drawerSunIcon.classList.add("hidden");
+          }
           if (badgeTheme) {
             badgeTheme.textContent = "Theme: Light Mode";
             badgeTheme.className = "inline-flex items-center px-3.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-800 border border-slate-200";
@@ -919,6 +948,9 @@
       // Event Listeners for Dark Mode toggles
       darkModeBtn.addEventListener("click", toggleDarkMode);
       mobileDarkModeBtn.addEventListener("click", toggleDarkMode);
+      if (drawerDarkModeBtn) {
+        drawerDarkModeBtn.addEventListener("click", toggleDarkMode);
+      }
 
       // Initialize Theme
       const savedTheme = localStorage.getItem("theme");
@@ -1105,7 +1137,7 @@
         
         // Reset button active classes
         [btnCentral, btnCouture, btnLocker].forEach(btn => {
-          btn.className = "w-full p-4 rounded-2xl border text-start flex items-center justify-between transition-all font-bold text-sm bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-350 hover:bg-slate-50 dark:hover:bg-slate-900/50";
+          btn.className = "w-full p-4 rounded-2xl border text-start flex items-center justify-between transition-all font-bold text-sm bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900/50";
           btn.querySelector("span:last-child").textContent = "• Select";
           btn.querySelector("span:last-child").className = "text-xs font-black text-slate-400";
         });

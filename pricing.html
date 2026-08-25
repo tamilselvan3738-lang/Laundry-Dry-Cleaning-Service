@@ -323,6 +323,22 @@
     <!-- Drawer Footer Actions -->
     <div class="pt-6 border-t border-slate-100 dark:border-slate-700 space-y-4">
       
+      <!-- Dark Mode Toggle inside mobile menu -->
+      <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-900/50 p-3 rounded-xl border border-slate-100 dark:border-slate-700">
+        <span class="text-sm font-semibold text-slate-600 dark:text-slate-400">Appearance (Dark Mode)</span>
+        <button id="drawer-dark-mode-btn" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200" aria-label="Toggle Dark Mode">
+          <!-- Drawer Moon Icon -->
+          <svg id="drawer-moon-icon" class="w-5 h-5 transition-transform duration-300 hover:rotate-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+          <!-- Drawer Sun Icon -->
+          <svg id="drawer-sun-icon" class="hidden w-5 h-5 text-slate-300 transition-transform duration-300 hover:rotate-45" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+          </svg>
+        </button>
+      </div>
+
       <!-- RTL Toggle inside mobile menu -->
       <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-900/50 p-3 rounded-xl border border-slate-100 dark:border-slate-700">
         <span class="text-sm font-semibold text-slate-600 dark:text-slate-400">Layout Direction (RTL)</span>
@@ -416,7 +432,7 @@
             </p>
 
             <div class="space-y-4 pt-2">
-              <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-150 dark:border-slate-800 hover:border-primary-300 transition-colors">
+              <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-800 hover:border-primary-300 transition-colors">
                 <div class="flex items-center gap-3">
                   <div class="w-10 h-10 rounded-xl bg-primary-100 dark:bg-primary-950/60 flex items-center justify-center text-primary-600 dark:text-primary-400">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>
@@ -432,7 +448,7 @@
                 </div>
               </div>
 
-              <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-150 dark:border-slate-800 hover:border-primary-300 transition-colors">
+              <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-800 hover:border-primary-300 transition-colors">
                 <div class="flex items-center gap-3">
                   <div class="w-10 h-10 rounded-xl bg-cyan-100 dark:bg-cyan-950/60 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" /></svg>
@@ -574,7 +590,7 @@
               Premium Leather Care
             </span>
             <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Leather, Suede & Hide Care Rates</h2>
-            <p class="text-sm sm:text-base text-slate-350">
+            <p class="text-sm sm:text-base text-slate-300">
               Restores suppleness, oils, and deep pigment levels to organic skins. Hand-brushed and conditioning coated by real leather curators.
             </p>
 
@@ -615,7 +631,7 @@
           
           <!-- Image left -->
           <div class="lg:col-span-5 flex justify-center order-last lg:order-first">
-            <div class="relative w-full max-w-sm bg-white dark:bg-slate-800 rounded-3xl p-4 shadow-xl border border-slate-150 dark:border-slate-700">
+            <div class="relative w-full max-w-sm bg-white dark:bg-slate-800 rounded-3xl p-4 shadow-xl border border-slate-100 dark:border-slate-700">
               <img src="images/pricing_delicates.jpg" alt="Garment care labels" class="w-full h-80 object-cover rounded-2xl" />
             </div>
           </div>
@@ -887,6 +903,11 @@
       const moonIcon = document.getElementById("moon-icon");
       const sunIcon = document.getElementById("sun-icon");
       
+      // Drawer Dark Mode elements
+      const drawerDarkModeBtn = document.getElementById("drawer-dark-mode-btn");
+      const drawerMoonIcon = document.getElementById("drawer-moon-icon");
+      const drawerSunIcon = document.getElementById("drawer-sun-icon");
+      
       const rtlModeBtn = document.getElementById("rtl-mode-btn");
       const rtlIcon = document.getElementById("rtl-icon");
       
@@ -981,6 +1002,10 @@
           sunIcon.classList.remove("hidden");
           mobileMoonIcon.classList.add("hidden");
           mobileSunIcon.classList.remove("hidden");
+          if (drawerMoonIcon && drawerSunIcon) {
+            drawerMoonIcon.classList.add("hidden");
+            drawerSunIcon.classList.remove("hidden");
+          }
           if (badgeTheme) {
             badgeTheme.textContent = "Theme: Dark Mode";
             badgeTheme.className = "inline-flex items-center px-3.5 py-1 rounded-full text-xs font-semibold bg-slate-800 text-slate-100 border border-slate-700";
@@ -991,6 +1016,10 @@
           sunIcon.classList.add("hidden");
           mobileMoonIcon.classList.remove("hidden");
           mobileSunIcon.classList.add("hidden");
+          if (drawerMoonIcon && drawerSunIcon) {
+            drawerMoonIcon.classList.remove("hidden");
+            drawerSunIcon.classList.add("hidden");
+          }
           if (badgeTheme) {
             badgeTheme.textContent = "Theme: Light Mode";
             badgeTheme.className = "inline-flex items-center px-3.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-800 border border-slate-200";
@@ -1007,6 +1036,9 @@
       // Event Listeners for Dark Mode toggles
       darkModeBtn.addEventListener("click", toggleDarkMode);
       mobileDarkModeBtn.addEventListener("click", toggleDarkMode);
+      if (drawerDarkModeBtn) {
+        drawerDarkModeBtn.addEventListener("click", toggleDarkMode);
+      }
 
       // Initialize Theme
       const savedTheme = localStorage.getItem("theme");

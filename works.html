@@ -322,6 +322,22 @@
     <!-- Drawer Footer Actions -->
     <div class="pt-6 border-t border-slate-100 dark:border-slate-700 space-y-4">
       
+      <!-- Dark Mode Toggle inside mobile menu -->
+      <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-900/50 p-3 rounded-xl border border-slate-100 dark:border-slate-700">
+        <span class="text-sm font-semibold text-slate-600 dark:text-slate-400">Appearance (Dark Mode)</span>
+        <button id="drawer-dark-mode-btn" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200" aria-label="Toggle Dark Mode">
+          <!-- Drawer Moon Icon -->
+          <svg id="drawer-moon-icon" class="w-5 h-5 transition-transform duration-300 hover:rotate-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+          <!-- Drawer Sun Icon -->
+          <svg id="drawer-sun-icon" class="hidden w-5 h-5 text-slate-300 transition-transform duration-300 hover:rotate-45" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+          </svg>
+        </button>
+      </div>
+
       <!-- RTL Toggle inside mobile menu -->
       <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-900/50 p-3 rounded-xl border border-slate-100 dark:border-slate-700">
         <span class="text-sm font-semibold text-slate-600 dark:text-slate-400">Layout Direction (RTL)</span>
@@ -365,7 +381,7 @@
               An Asymmetrical Trace <br class="hidden sm:inline">
               <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-sky-400 dark:from-primary-400 dark:to-cyan-400">Of Our Fabric Journey</span>
             </h1>
-            <p class="text-sm sm:text-base text-slate-650 dark:text-slate-300 leading-relaxed max-w-xl">
+            <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed max-w-xl">
               We process your delicate wear through an 8-stage custodial cycle, from instant booking checks to sterile final envelope deliveries.
             </p>
 
@@ -430,7 +446,7 @@
               <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4 mb-6">
                 <div>
                   <h4 class="text-sm font-black text-slate-900 dark:text-white">Select Date & Time</h4>
-                  <p class="text-[10px] text-slate-550 mt-0.5">Mock pickup calendar booking interface</p>
+                  <p class="text-[10px] text-slate-500 mt-0.5">Mock pickup calendar booking interface</p>
                 </div>
                 <span class="text-xs font-bold text-primary-600 uppercase">Phase 01</span>
               </div>
@@ -439,15 +455,15 @@
               <span class="block text-[11px] font-black text-slate-400 uppercase mb-3">Select Day</span>
               <div class="grid grid-cols-3 gap-3 mb-6">
                 <button onclick="selectDate(this, 'Mon, Oct 26')" class="date-btn p-3 bg-white dark:bg-slate-900 rounded-2xl border-2 border-primary-500 text-center font-bold focus:outline-none transition-all">
-                  <span class="block text-xs text-slate-550 uppercase">Mon</span>
+                  <span class="block text-xs text-slate-500 uppercase">Mon</span>
                   <span class="block text-lg font-black text-primary-600">26</span>
                 </button>
                 <button onclick="selectDate(this, 'Tue, Oct 27')" class="date-btn p-3 bg-white dark:bg-slate-900 rounded-2xl border-2 border-slate-200 dark:border-slate-700 text-center font-bold focus:outline-none hover:border-primary-300 transition-all">
-                  <span class="block text-xs text-slate-550 uppercase">Tue</span>
+                  <span class="block text-xs text-slate-500 uppercase">Tue</span>
                   <span class="block text-lg font-black text-slate-700 dark:text-slate-200">27</span>
                 </button>
                 <button onclick="selectDate(this, 'Wed, Oct 28')" class="date-btn p-3 bg-white dark:bg-slate-900 rounded-2xl border-2 border-slate-200 dark:border-slate-700 text-center font-bold focus:outline-none hover:border-primary-300 transition-all">
-                  <span class="block text-xs text-slate-550 uppercase">Wed</span>
+                  <span class="block text-xs text-slate-500 uppercase">Wed</span>
                   <span class="block text-lg font-black text-slate-700 dark:text-slate-200">28</span>
                 </button>
               </div>
@@ -550,7 +566,7 @@
           <div class="lg:col-span-5 flex justify-center order-last lg:order-first">
             <div class="relative w-full max-w-sm">
               <div class="absolute inset-0 bg-primary-500/10 rounded-3xl blur-2xl"></div>
-              <div class="relative bg-white dark:bg-slate-800 rounded-3xl p-3 shadow-xl border border-slate-200/50 dark:border-slate-750">
+              <div class="relative bg-white dark:bg-slate-800 rounded-3xl p-3 shadow-xl border border-slate-200/50 dark:border-slate-800">
                 <img src="images/works_inspection.jpg" alt="Hands in white gloves inspecting designer coat tags and seams" class="w-full h-80 object-cover rounded-2xl" />
               </div>
             </div>
@@ -659,7 +675,7 @@
                   <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" /></svg>
                 </div>
                 <h4 class="text-xs font-extrabold text-slate-900 dark:text-white">Luminosity Check</h4>
-                <p class="text-[9px] text-slate-550 mt-1">UV scanning for micro stain residuals.</p>
+                <p class="text-[9px] text-slate-500 mt-1">UV scanning for micro stain residuals.</p>
               </div>
 
               <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-800 text-center">
@@ -667,7 +683,7 @@
                   <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>
                 </div>
                 <h4 class="text-xs font-extrabold text-slate-900 dark:text-white">Cloud Touch</h4>
-                <p class="text-[9px] text-slate-555 mt-1">Soft check for static and fiber rigidity.</p>
+                <p class="text-[9px] text-slate-600 mt-1">Soft check for static and fiber rigidity.</p>
               </div>
 
               <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-800 text-center">
@@ -675,7 +691,7 @@
                   <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
                 </div>
                 <h4 class="text-xs font-extrabold text-slate-900 dark:text-white">Aroma Infusion</h4>
-                <p class="text-[9px] text-slate-555 mt-1">Verifying organic scents lock holds.</p>
+                <p class="text-[9px] text-slate-600 mt-1">Verifying organic scents lock holds.</p>
               </div>
             </div>
           </div>
@@ -695,7 +711,7 @@
               <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-700 pb-4 mb-4">
                 <div>
                   <h4 class="text-sm font-black text-slate-900 dark:text-white">Active Courier Dispatch</h4>
-                  <p class="text-[10px] text-slate-550">Live courier tracking simulator</p>
+                  <p class="text-[10px] text-slate-500">Live courier tracking simulator</p>
                 </div>
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
               </div>
@@ -715,7 +731,7 @@
               <div class="flex justify-between items-center text-xs">
                 <div>
                   <span class="block text-[9px] text-slate-400 uppercase font-black">Estimated Window</span>
-                  <span class="font-bold text-slate-850 dark:text-slate-200">Today, 04:30 PM - 05:00 PM</span>
+                  <span class="font-bold text-slate-800 dark:text-slate-200">Today, 04:30 PM - 05:00 PM</span>
                 </div>
                 <div class="text-end">
                   <span class="block text-[9px] text-slate-400 uppercase font-black">ETA</span>
@@ -879,6 +895,11 @@
       
       // Theme switcher elements
       const darkBtn = document.getElementById("dark-mode-btn");
+      
+      // Drawer Dark Mode elements
+      const drawerDarkModeBtn = document.getElementById("drawer-dark-mode-btn");
+      const drawerMoonIcon = document.getElementById("drawer-moon-icon");
+      const drawerSunIcon = document.getElementById("drawer-sun-icon");
       const mobileDarkBtn = document.getElementById("mobile-dark-mode-btn");
       const moonIcon = document.getElementById("moon-icon");
       const sunIcon = document.getElementById("sun-icon");
@@ -918,12 +939,20 @@
           sunIcon.classList.remove("hidden");
           mobileMoonIcon.classList.add("hidden");
           mobileSunIcon.classList.remove("hidden");
+          if (drawerMoonIcon && drawerSunIcon) {
+            drawerMoonIcon.classList.add("hidden");
+            drawerSunIcon.classList.remove("hidden");
+          }
         } else {
           htmlElement.classList.remove("dark");
           
           sunIcon.classList.add("hidden");
           moonIcon.classList.remove("hidden");
           mobileSunIcon.classList.add("hidden");
+          if (drawerMoonIcon && drawerSunIcon) {
+            drawerMoonIcon.classList.remove("hidden");
+            drawerSunIcon.classList.add("hidden");
+          }
           mobileMoonIcon.classList.remove("hidden");
         }
       }
@@ -936,6 +965,9 @@
 
       darkBtn.addEventListener("click", toggleDarkMode);
       mobileDarkBtn.addEventListener("click", toggleDarkMode);
+      if (drawerDarkModeBtn) {
+        drawerDarkModeBtn.addEventListener("click", toggleDarkMode);
+      }
 
       // Initialize Theme
       const savedTheme = localStorage.getItem("theme");
@@ -1096,9 +1128,9 @@
     function selectTime(element, timeVal) {
       document.querySelectorAll('.time-btn').forEach(btn => {
         btn.classList.remove('bg-primary-500', 'text-white');
-        btn.classList.add('bg-white', 'dark:bg-slate-900', 'border', 'border-slate-200', 'dark:border-slate-700', 'text-slate-700', 'dark:text-slate-350');
+        btn.classList.add('bg-white', 'dark:bg-slate-900', 'border', 'border-slate-200', 'dark:border-slate-700', 'text-slate-700', 'dark:text-slate-300');
       });
-      element.classList.remove('bg-white', 'dark:bg-slate-900', 'border', 'border-slate-200', 'dark:border-slate-700', 'text-slate-700', 'dark:text-slate-350');
+      element.classList.remove('bg-white', 'dark:bg-slate-900', 'border', 'border-slate-200', 'dark:border-slate-700', 'text-slate-700', 'dark:text-slate-300');
       element.classList.add('bg-primary-500', 'text-white');
 
       selectedTimeStr = timeVal;
