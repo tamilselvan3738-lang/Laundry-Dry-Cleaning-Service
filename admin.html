@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Laundry & Dry Cleaning Control Panel</title>
+  <!-- Tailwind CSS v3 via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Custom scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(14, 165, 233, 0.2);
+      border-radius: 9px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(14, 165, 233, 0.4);
+    }
+    html {
+      visibility: hidden;
+    }
+    html.ready {
+      visibility: visible;
+    }
+
+    /* Prevent horizontal scrolling and force box-sizing */
+    *, *::before, *::after {
+      box-sizing: border-box !important;
+    }
+    html, body {
+      max-width: 100% !important;
+      overflow-x: clip !important;
+    }
+    img, video, iframe {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+    /* Mobile breakpoint optimizations */
+    @media (max-width: 1024px) {
+      .max-w-7xl, .container {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+      }
+    }
+    @media (max-width: 768px) {
+      .max-w-7xl, .container {
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+      }
+      /* Collapse non-responsive grid systems on tablet/mobile */
+      .grid-cols-2:not([class*="sm:"]):not([class*="md:"]):not([class*="lg:"]),
+      .grid-cols-3:not([class*="sm:"]):not([class*="md:"]):not([class*="lg:"]),
+      .grid-cols-4:not([class*="sm:"]):not([class*="md:"]):not([class*="lg:"]) {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      }
+    }
+    @media (max-width: 480px) {
+      .max-w-7xl, .container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+      h1 {
+        font-size: 1.85rem !important;
+        line-height: 1.2 !important;
+      }
+      h2 {
+        font-size: 1.45rem !important;
+        line-height: 1.25 !important;
+      }
+      h3 {
+        font-size: 1.25rem !important;
+      }
+      p {
+        font-size: 0.85rem !important;
+      }
+    }
+    @media (max-width: 320px) {
+      .max-w-7xl, .container {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+      }
+      h1 {
+        font-size: 1.5rem !important;
+      }
+      h2 {
+        font-size: 1.2rem !important;
+      }
+      p {
+        font-size: 0.75rem !important;
+      }
+    }
+  </style>
+  <script>
+    // Initialize theme and direction from localstorage before rendering
+    (function() {
+      const theme = localStorage.getItem('theme') || 'dark';
+      const rtl = localStorage.getItem('rtl') || 'ltr';
+      document.documentElement.className = theme === 'dark' ? 'dark' : '';
+      document.documentElement.setAttribute('dir', rtl);
+      document.addEventListener('DOMContentLoaded', () => {
+        document.documentElement.classList.add('ready');
+      });
+    })();
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-[#070913] dark:text-slate-100 font-sans transition-colors duration-300 min-h-screen flex flex-col">
+
+  <!-- TOP HEADER (Full-width across top in Laptop/Desktop View - Match screenshot) -->
+  <header class="sticky top-0 z-30 bg-white dark:bg-[#0b0c16] border-b border-slate-200 dark:border-slate-800 px-6 py-4 flex items-center justify-between transition-colors duration-300">
+    
+    <!-- Left: Brand Logo -->
+    <div class="flex items-center gap-3">
+      <!-- Logo & Brand Header -->
+      <a href="index.html" class="flex items-center gap-3 group hover:opacity-90 transition-opacity">
+        <!-- Creative Brand Logo -->
+        <div class="relative w-10 h-10 flex-shrink-0">
+          <svg class="absolute inset-0 w-full h-full text-brand-500 dark:text-brand-400 animate-[spin_12s_linear_infinite]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="4.5" stroke-dasharray="14 10" stroke-linecap="round" />
+          </svg>
+          <div class="absolute inset-1 rounded-full border border-brand-200/50 dark:border-brand-800/50"></div>
+          <div class="absolute inset-1.5 bg-gradient-to-br from-brand-400 to-brand-600 dark:from-brand-500 dark:to-brand-700 rounded-full flex items-center justify-center shadow-inner overflow-hidden">
+            <svg class="absolute bottom-0 left-0 w-full h-1/2 opacity-30 text-white fill-current" viewBox="0 0 100 50" preserveAspectRatio="none">
+              <path d="M0,25 C30,40 70,10 100,25 L100,50 L0,50 Z"></path>
+            </svg>
+            <svg class="w-5 h-5 text-white relative z-10 drop-shadow-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a3 3 0 0 1 3 3c0 1.5-1.5 2-3 3.5V10" />
+              <path d="M2 17l10-7 10 7H2z" fill="rgba(255,255,255,0.2)" />
+            </svg>
+            <span class="absolute top-1.5 right-2 w-1 h-1 bg-white/80 rounded-full animate-bounce" style="animation-delay: 0.1s"></span>
+            <span class="absolute top-3 left-2 w-0.5 h-0.5 bg-white/60 rounded-full animate-bounce" style="animation-delay: 0.4s"></span>
+          </div>
+        </div>
+        <!-- Brand text (3-line layout) -->
+        <div class="flex flex-col text-start">
+          <span class="text-xs font-black tracking-tight text-brand-600 dark:text-brand-400 leading-none">LAUNDRY</span>
+          <span class="text-[8px] font-extrabold tracking-widest text-slate-650 dark:text-slate-300 leading-none mt-0.5">& DRY CLEANING</span>
+          <span class="text-[7px] font-medium uppercase tracking-widest text-slate-500 dark:text-slate-400 leading-none mt-0.5">SERVICE</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Right: Back Home CTA and User Dropdown Status Pill (JD initials + Name + Down arrow - Match screenshot) and Hamburger -->
+    <div class="flex items-center gap-3">
+      <!-- Back to Home Button -->
+      <a href="index.html" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-150 shadow-sm">
+        <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span>Back to Home</span>
+      </a>
+
+      <!-- User Dropdown Status Pill -->
+      <div class="relative" id="user-dropdown-wrapper">
+        <button onclick="toggleUserDropdown(event)" class="flex items-center gap-2.5 bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-full px-3 py-1.5 text-xs text-start hover:bg-slate-100 dark:hover:bg-slate-850 transition-colors focus:outline-none" id="user-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+          <div class="w-6.5 h-6.5 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-[10px] flex-shrink-0">AD</div>
+          <div class="hidden sm:block">
+            <h4 class="text-[10px] font-bold text-slate-850 dark:text-slate-200 leading-none">Admin Dispatch</h4>
+          </div>
+          <svg class="w-3 h-3 text-slate-400 transition-transform duration-200" id="user-dropdown-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+        </button>
+        
+        <!-- Dropdown Menu -->
+        <div id="user-dropdown-menu" class="absolute end-0 mt-2 py-2 w-48 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-700 opacity-0 invisible scale-95 transition-all duration-200 origin-top-right z-50">
+          <div class="px-4 py-1.5 text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">
+            Logged in as:
+          </div>
+          <div class="px-4 pb-2 text-xs font-bold text-emerald-600 dark:text-emerald-400">
+            Admin Dispatch
+          </div>
+          <div class="border-t border-slate-100 dark:border-slate-700 my-1"></div>
+          <!-- Menu Actions -->
+          <button onclick="switchScreen('overview', 'Dashboard Overview', 'nav-overview'); closeUserDropdown();" class="w-full text-start px-4 py-2 text-xs text-slate-700 dark:text-slate-350 hover:bg-brand-50 hover:text-brand-600 dark:hover:bg-slate-700 dark:hover:text-brand-400 transition-colors">Overview</button>
+          <button onclick="switchScreen('customers', 'Customer Management', 'nav-customers'); closeUserDropdown();" class="w-full text-start px-4 py-2 text-xs text-slate-700 dark:text-slate-350 hover:bg-brand-50 hover:text-brand-600 dark:hover:bg-slate-700 dark:hover:text-brand-400 transition-colors">Manage Customers</button>
+          <a href="index.html" class="block px-4 py-2 text-xs text-slate-700 dark:text-slate-350 hover:bg-brand-50 hover:text-brand-600 dark:hover:bg-slate-700 dark:hover:text-brand-400 transition-colors">Back to Home</a>
+          <div class="border-t border-slate-100 dark:border-slate-700 my-1"></div>
+          <a href="login.html" class="block px-4 py-2 text-xs text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors">Logout</a>
+        </div>
+      </div>
+
+      <!-- Hamburger Menu Button -->
+      <button onclick="toggleMobileSidebar(true)" class="lg:hidden p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 focus:outline-none" aria-label="Open Sidebar">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+    </div>
+
+  </header>
+
+  <!-- BODY CONTENT AREA (Sidebar below Header) -->
+  <div class="flex flex-1 min-h-0 relative">
+
+    <!-- Mobile Backdrop Overlay -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/60 z-40 hidden lg:hidden transition-opacity duration-300 opacity-0" onclick="toggleMobileSidebar(false)"></div>
+
+    <!-- SIDEBAR CONTAINER -->
+    <aside id="sidebar-panel" class="fixed inset-y-0 end-0 lg:start-0 z-50 w-72 bg-white dark:bg-[#0b0c16] text-slate-500 dark:text-slate-400 border-s lg:border-s-0 lg:border-e border-slate-200 dark:border-slate-800 shrink-0 flex flex-col justify-between transform translate-x-full lg:translate-x-0 lg:flex pt-4 lg:pt-0">
+      
+      <!-- Sidebar Header: Menu Label & Toggles next to logo -->
+      <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <!-- Control Panel Grid Icon -->
+          <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span class="text-xs font-black tracking-wider text-slate-800 dark:text-slate-200 uppercase">Control Center</span>
+        </div>
+
+        <div class="flex gap-2 items-center">
+          <!-- Theme Toggle -->
+          <button id="dark-mode-btn" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-500 dark:text-slate-400 hover:text-slate-805 dark:hover:text-white transition-colors focus:outline-none" aria-label="Toggle Theme">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+          </button>
+          <!-- Direction Toggle -->
+          <button id="rtl-mode-btn" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-500 dark:text-slate-400 hover:text-slate-805 dark:hover:text-white transition-colors focus:outline-none" aria-label="Toggle RTL">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M4 8h16M16 4l4 4-4 4M20 16H4M8 12l-4 4 4 4" />
+            </svg>
+          </button>
+          <!-- Mobile Close Trigger -->
+          <button onclick="toggleMobileSidebar(false)" class="lg:hidden p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-400 hover:text-white focus:outline-none" aria-label="Close Sidebar">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Exposed Flat Sidebar Items (Rectangular items with Solid Left Border for active state) -->
+      <nav class="flex-1 overflow-y-auto py-4 space-y-0.5 select-none text-start">
+        
+        <!-- 1. Dashboard Overview -->
+        <button onclick="switchScreen('overview', 'Dashboard Overview', 'nav-overview')" class="nav-item w-full flex items-center gap-3 px-6 py-3.5 text-xs font-bold transition-all duration-150 border-s-4 border-brand-500 bg-brand-50/50 dark:bg-brand-950/20 text-brand-600 dark:text-brand-400" id="nav-overview">
+          <svg class="w-4 h-4 nav-icon text-brand-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span>Dashboard Overview</span>
+        </button>
+
+        <!-- 2. Customer Management -->
+        <button onclick="switchScreen('customers', 'Customer Management', 'nav-customers')" class="nav-item w-full flex items-center gap-3 px-6 py-3.5 text-xs font-bold transition-all duration-150 border-s-4 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900/30" id="nav-customers">
+          <svg class="w-4 h-4 nav-icon text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <span>Customer Management</span>
+        </button>
+
+        <!-- 3. Order Management -->
+        <button onclick="switchScreen('orders', 'Order Management', 'nav-orders')" class="nav-item w-full flex items-center gap-3 px-6 py-3.5 text-xs font-bold transition-all duration-150 border-s-4 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900/30" id="nav-orders">
+          <svg class="w-4 h-4 nav-icon text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line>
+          </svg>
+          <span>Order Management</span>
+        </button>
+
+        <!-- 4. Pickup Management -->
+        <button onclick="switchScreen('pickups', 'Pickup Management', 'nav-pickups')" class="nav-item w-full flex items-center gap-3 px-6 py-3.5 text-xs font-bold transition-all duration-150 border-s-4 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900/30" id="nav-pickups">
+          <svg class="w-4 h-4 nav-icon text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>Pickup Management</span>
+        </button>
+
+        <!-- 5. Delivery Management -->
+        <button onclick="switchScreen('deliveries', 'Delivery Management', 'nav-deliveries')" class="nav-item w-full flex items-center gap-3 px-6 py-3.5 text-xs font-bold transition-all duration-150 border-s-4 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900/30" id="nav-deliveries">
+          <svg class="w-4 h-4 nav-icon text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle>
+          </svg>
+          <span>Delivery Management</span>
+        </button>
+
+        <!-- 6. Service Management -->
+        <button onclick="switchScreen('services', 'Service Management', 'nav-services')" class="nav-item w-full flex items-center gap-3 px-6 py-3.5 text-xs font-bold transition-all duration-150 border-s-4 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900/30" id="nav-services">
+          <svg class="w-4 h-4 nav-icon text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span>Service Management</span>
+        </button>
+
+        <!-- 7. Pricing Management -->
+        <button onclick="switchScreen('pricing', 'Pricing Management', 'nav-pricing')" class="nav-item w-full flex items-center gap-3 px-6 py-3.5 text-xs font-bold transition-all duration-150 border-s-4 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900/30" id="nav-pricing">
+          <svg class="w-4 h-4 nav-icon text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+          <span>Pricing Management</span>
+        </button>
+
+        <!-- 8. Billing Management -->
+        <button onclick="switchScreen('billing', 'Billing Management', 'nav-billing')" class="nav-item w-full flex items-center gap-3 px-6 py-3.5 text-xs font-bold transition-all duration-150 border-s-4 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900/30" id="nav-billing">
+          <svg class="w-4 h-4 nav-icon text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="12" y1="4" x2="12" y2="20"></line>
+          </svg>
+          <span>Billing Management</span>
+        </button>
+
+        <!-- 9. Payment Management -->
+        <button onclick="switchScreen('payments', 'Payment Management', 'nav-payments')" class="nav-item w-full flex items-center gap-3 px-6 py-3.5 text-xs font-bold transition-all duration-150 border-s-4 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900/30" id="nav-payments">
+          <svg class="w-4 h-4 nav-icon text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line>
+          </svg>
+          <span>Payment Management</span>
+        </button>
+
+        <!-- 10. Coverage Area Management -->
+        <button onclick="switchScreen('coverage', 'Coverage Area Management', 'nav-coverage')" class="nav-item w-full flex items-center gap-3 px-6 py-3.5 text-xs font-bold transition-all duration-150 border-s-4 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900/30" id="nav-coverage">
+          <svg class="w-4 h-4 nav-icon text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <span>Coverage Area</span>
+        </button>
+
+        <!-- 11. Notifications Management -->
+        <button onclick="switchScreen('notifications', 'Notifications Management', 'nav-notifications')" class="nav-item w-full flex items-center gap-3 px-6 py-3.5 text-xs font-bold transition-all duration-150 border-s-4 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900/30" id="nav-notifications">
+          <svg class="w-4 h-4 nav-icon text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+          <span>Notifications</span>
+        </button>
+
+        <!-- 12. Reports -->
+        <button onclick="switchScreen('reports', 'Reports & Analytics', 'nav-reports')" class="nav-item w-full flex items-center gap-3 px-6 py-3.5 text-xs font-bold transition-all duration-150 border-s-4 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900/30" id="nav-reports">
+          <svg class="w-4 h-4 nav-icon text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          <span>Reports & Analytics</span>
+        </button>
+
+      </nav>
+
+      <!-- Sidebar Footer / Logout -->
+      <div class="p-6 border-t border-slate-100 dark:border-slate-850 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-brand-500/10 text-brand-600 dark:text-brand-400 flex items-center justify-center font-bold text-xs">AD</div>
+          <div class="text-start">
+            <h4 class="text-xs font-bold text-slate-800 dark:text-slate-200">Admin Staff</h4>
+            <span class="text-[9px] text-slate-400 block">Laundry Dispatcher</span>
+          </div>
+        </div>
+        <a href="login.html" class="p-2 rounded-xl bg-slate-50 dark:bg-slate-900 hover:bg-red-50 dark:hover:bg-red-950/20 text-slate-400 hover:text-red-500 transition-colors" aria-label="Logout">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 01-3-3h4a3 3 0 013 3v1" /></svg>
+        </a>
+      </div>
+
+    </aside>
+
+    <!-- CONTENT VIEWPORTS -->
+    <div class="flex-grow flex flex-col min-w-0">
+      
+      <!-- Viewport Breadcrumbs -->
+      <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-850 flex justify-start items-center text-xs text-slate-400 bg-white dark:bg-[#0b0c16]">
+        <span class="font-semibold text-slate-800 dark:text-slate-200 uppercase tracking-wider">Admin Portal</span>
+        <span class="mx-2">/</span>
+        <span id="breadcrumb-text" class="text-brand-500 font-bold">Dashboard Overview</span>
+      </div>
+
+      <main class="p-6 sm:p-8 flex-grow overflow-y-auto space-y-6">
+
+        <!-- ================= SCREEN 1: OVERVIEW ================= -->
+        <div id="screen-overview" class="space-y-8 screen-panel text-start">
+          
+          <!-- Flat Horizontal Sub-tabs (Outline border-bottom rectangular layout - NOT pills) -->
+          <div class="flex flex-wrap border-b border-slate-200 dark:border-slate-800">
+            <button onclick="switchSubTab('overview', 'total-customers')" class="tab-btn-overview px-5 py-3 text-xs font-bold text-brand-600 dark:text-brand-400 border-b-2 border-brand-500 bg-slate-100/50 dark:bg-slate-900/30" id="tab-overview-total-customers">Total Customers</button>
+            <button onclick="switchSubTab('overview', 'active-orders')" class="tab-btn-overview px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-overview-active-orders">Active Orders</button>
+            <button onclick="switchSubTab('overview', 'today-pickups')" class="tab-btn-overview px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-overview-today-pickups">Today's Pickups</button>
+            <button onclick="switchSubTab('overview', 'today-deliveries')" class="tab-btn-overview px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-overview-today-deliveries">Today's Deliveries</button>
+            <button onclick="switchSubTab('overview', 'cleaning-orders')" class="tab-btn-overview px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-overview-cleaning-orders">Orders in Cleaning</button>
+            <button onclick="switchSubTab('overview', 'completed-orders')" class="tab-btn-overview px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-overview-completed-orders">Completed Orders</button>
+            <button onclick="switchSubTab('overview', 'revenue-overview')" class="tab-btn-overview px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-overview-revenue-overview">Revenue Overview</button>
+          </div>
+
+          <!-- Subtab views -->
+          <div id="subtab-overview-total-customers" class="subtab-view-overview space-y-6">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 rounded-3xl shadow-sm">
+              <h3 class="text-sm font-black text-slate-800 dark:text-white uppercase mb-4">Total Customers Metrics</h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-6 bg-slate-50 dark:bg-slate-900/60 rounded-2xl border border-slate-100 dark:border-slate-800">
+                  <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Registered Users</span>
+                  <span class="text-3xl font-black text-slate-850 dark:text-white block">1,482</span>
+                </div>
+                <div class="p-6 bg-slate-50 dark:bg-slate-900/60 rounded-2xl border border-slate-100 dark:border-slate-800">
+                  <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">New This Week</span>
+                  <span class="text-3xl font-black text-slate-850 dark:text-white block">+28</span>
+                </div>
+                <div class="p-6 bg-slate-50 dark:bg-slate-900/60 rounded-2xl border border-slate-100 dark:border-slate-800">
+                  <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Active Subscribers</span>
+                  <span class="text-3xl font-black text-slate-850 dark:text-white block">854</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="subtab-overview-active-orders" class="subtab-view-overview space-y-6 hidden">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 rounded-3xl shadow-sm">
+              <h3 class="text-sm font-bold mb-2">Live Active Orders</h3>
+              <p class="text-xs text-slate-400">Total **48** active orders in logistics pipelines.</p>
+            </div>
+          </div>
+          <div id="subtab-overview-today-pickups" class="subtab-view-overview space-y-6 hidden">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 rounded-3xl shadow-sm"><h3 class="text-sm font-bold">Today's Scheduled Pickups</h3><p class="text-xs text-slate-400">Total **12** pickups pending dispatch today.</p></div>
+          </div>
+          <div id="subtab-overview-today-deliveries" class="subtab-view-overview space-y-6 hidden">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 rounded-3xl shadow-sm"><h3 class="text-sm font-bold">Today's Scheduled Deliveries</h3><p class="text-xs text-slate-400">Total **15** items ready for courier out-route.</p></div>
+          </div>
+          <div id="subtab-overview-cleaning-orders" class="subtab-view-overview space-y-6 hidden">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 rounded-3xl shadow-sm"><h3 class="text-sm font-bold">Garments in Washing Drums</h3><p class="text-xs text-slate-400">Total **21** orders undergoing chemical care.</p></div>
+          </div>
+          <div id="subtab-overview-completed-orders" class="subtab-view-overview space-y-6 hidden">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 rounded-3xl shadow-sm"><h3 class="text-sm font-bold">Completed Care Archives</h3><p class="text-xs text-slate-400">Total **1,204** cycles completed all-time.</p></div>
+          </div>
+          <div id="subtab-overview-revenue-overview" class="subtab-view-overview space-y-6 hidden">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 rounded-3xl shadow-sm"><h3 class="text-sm font-bold">Live Revenue Reports</h3><p class="text-xs text-slate-400">This month gross: **$12,482.00**.</p></div>
+          </div>
+
+        </div>
+
+        <!-- ================= SCREEN 2: CUSTOMER MANAGEMENT ================= -->
+        <div id="screen-customers" class="space-y-6 screen-panel hidden text-start">
+          
+          <div class="flex flex-wrap border-b border-slate-200 dark:border-slate-800">
+            <button onclick="switchSubTab('customers', 'add')" class="tab-btn-customers px-5 py-3 text-xs font-bold text-brand-600 dark:text-brand-400 border-b-2 border-brand-500 bg-slate-100/50 dark:bg-slate-900/30" id="tab-customers-add">Add Customer</button>
+            <button onclick="switchSubTab('customers', 'view')" class="tab-btn-customers px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-customers-view">View Customers</button>
+            <button onclick="switchSubTab('customers', 'edit')" class="tab-btn-customers px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-customers-edit">Edit Customer</button>
+            <button onclick="switchSubTab('customers', 'details')" class="tab-btn-customers px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-customers-details">Customer Details</button>
+            <button onclick="switchSubTab('customers', 'active')" class="tab-btn-customers px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-customers-active">Active Customers</button>
+            <button onclick="switchSubTab('customers', 'delete')" class="tab-btn-customers px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-customers-delete">Delete Customer</button>
+          </div>
+
+          <!-- Add Customer Form -->
+          <div id="subtab-customers-add" class="subtab-view-customers space-y-6">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 rounded-3xl max-w-xl mx-auto">
+              <h3 class="text-sm font-extrabold mb-4 uppercase">Register New Customer</h3>
+              <form class="space-y-4" onsubmit="event.preventDefault(); addNewCustomer();">
+                <div class="space-y-1">
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase">Full Name</label>
+                  <input type="text" id="cust-name" required class="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:ring-1 focus:ring-brand-500" />
+                </div>
+                <div class="space-y-1">
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase">Email Address</label>
+                  <input type="email" id="cust-email" required class="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:ring-1 focus:ring-brand-500" />
+                </div>
+                <button type="submit" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold transition-all shadow-md">Add Customer Profile</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- View Customers Table -->
+          <div id="subtab-customers-view" class="subtab-view-customers space-y-6 hidden">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm overflow-x-auto">
+              <table class="w-full text-xs text-start border-collapse">
+                <thead>
+                  <tr class="border-b border-slate-100 dark:border-slate-800 text-slate-400">
+                    <th class="py-3 text-start font-bold">ID</th>
+                    <th class="py-3 text-start font-bold">Name</th>
+                    <th class="py-3 text-start font-bold">Email</th>
+                    <th class="py-3 text-start font-bold">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="customers-table-body" class="divide-y divide-slate-50 dark:divide-slate-800">
+                  <tr>
+                    <td class="py-4 font-bold text-brand-600">#CST-102</td>
+                    <td class="py-4 font-semibold text-slate-800 dark:text-slate-200">John Doe</td>
+                    <td class="py-4 text-slate-500">john.doe@matrix.com</td>
+                    <td class="py-4"><span class="px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400">Active</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="subtab-customers-edit" class="subtab-view-customers space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Select Profile to Edit</h4></div></div>
+          <div id="subtab-customers-details" class="subtab-view-customers space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Detailed user session records</h4></div></div>
+          <div id="subtab-customers-active" class="subtab-view-customers space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Currently Active Subscribers</h4></div></div>
+          <div id="subtab-customers-delete" class="subtab-view-customers space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Delete Profile Records Manager</h4></div></div>
+
+        </div>
+
+        <!-- ================= SCREEN 3: ORDER MANAGEMENT ================= -->
+        <div id="screen-orders" class="space-y-6 screen-panel hidden text-start">
+          
+          <div class="flex flex-wrap border-b border-slate-200 dark:border-slate-800">
+            <button onclick="switchSubTab('orders', 'all')" class="tab-btn-orders px-5 py-3 text-xs font-bold text-brand-600 dark:text-brand-400 border-b-2 border-brand-500 bg-slate-100/50 dark:bg-slate-900/30" id="tab-orders-all">All Orders</button>
+            <button onclick="switchSubTab('orders', 'new')" class="tab-btn-orders px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-orders-new">New Orders</button>
+            <button onclick="switchSubTab('orders', 'scheduled')" class="tab-btn-orders px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-orders-scheduled">Pickup Scheduled</button>
+            <button onclick="switchSubTab('orders', 'collected')" class="tab-btn-orders px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-orders-collected">Collected Orders</button>
+            <button onclick="switchSubTab('orders', 'cleaning')" class="tab-btn-orders px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-orders-cleaning">Orders in Cleaning</button>
+            <button onclick="switchSubTab('orders', 'quality')" class="tab-btn-orders px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-orders-quality">Quality Check</button>
+            <button onclick="switchSubTab('orders', 'delivery')" class="tab-btn-orders px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-orders-delivery">Out for Delivery</button>
+            <button onclick="switchSubTab('orders', 'delivered')" class="tab-btn-orders px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-orders-delivered">Delivered Orders</button>
+            <button onclick="switchSubTab('orders', 'cancelled')" class="tab-btn-orders px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-orders-cancelled">Cancelled Orders</button>
+          </div>
+
+          <div id="subtab-orders-all" class="subtab-view-orders space-y-6">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm overflow-x-auto">
+              <table class="w-full text-xs text-start border-collapse">
+                <thead>
+                  <tr class="border-b border-slate-100 dark:border-slate-800 text-slate-400">
+                    <th class="py-3 text-start font-bold">Order ID</th>
+                    <th class="py-3 text-start font-bold">Customer</th>
+                    <th class="py-3 text-start font-bold">Services</th>
+                    <th class="py-3 text-start font-bold">Grand Total</th>
+                    <th class="py-3 text-start font-bold">Status</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-50 dark:divide-slate-800">
+                  <tr>
+                    <td class="py-4 font-bold text-brand-600">#ORD-9482</td>
+                    <td class="py-4 font-semibold">John Doe</td>
+                    <td class="py-4 text-slate-500">Wash & Fold</td>
+                    <td class="py-4 font-bold">$24.00</td>
+                    <td class="py-4"><span class="px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-brand-50 dark:bg-brand-950/20 text-brand-500">In Cleaning</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="subtab-orders-new" class="subtab-view-orders space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">New Booking Registrations</h4></div></div>
+          <div id="subtab-orders-scheduled" class="subtab-view-orders space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Scheduled Pickups Queue</h4></div></div>
+          <div id="subtab-orders-collected" class="subtab-view-orders space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Collected Laundry items</h4></div></div>
+          <div id="subtab-orders-cleaning" class="subtab-view-orders space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Orders undergoing wash cycles</h4></div></div>
+          <div id="subtab-orders-quality" class="subtab-view-orders space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Quality assurance verification queue</h4></div></div>
+          <div id="subtab-orders-delivery" class="subtab-view-orders space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Courier transit active assignments</h4></div></div>
+          <div id="subtab-orders-delivered" class="subtab-view-orders space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Successfully delivered orders</h4></div></div>
+          <div id="subtab-orders-cancelled" class="subtab-view-orders space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Voided / Cancelled order logs</h4></div></div>
+
+        </div>
+
+        <!-- ================= SCREEN 4: PICKUP MANAGEMENT ================= -->
+        <div id="screen-pickups" class="space-y-6 screen-panel hidden text-start">
+          
+          <div class="flex flex-wrap border-b border-slate-200 dark:border-slate-800">
+            <button onclick="switchSubTab('pickups', 'today')" class="tab-btn-pickups px-5 py-3 text-xs font-bold text-brand-600 dark:text-brand-400 border-b-2 border-brand-500 bg-slate-100/50 dark:bg-slate-900/30" id="tab-pickups-today">Today's Pickups</button>
+            <button onclick="switchSubTab('pickups', 'upcoming')" class="tab-btn-pickups px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-pickups-upcoming">Upcoming Pickups</button>
+            <button onclick="switchSubTab('pickups', 'slots')" class="tab-btn-pickups px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-pickups-slots">Pickup Time Slots</button>
+            <button onclick="switchSubTab('pickups', 'assign')" class="tab-btn-pickups px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-pickups-assign">Assign Pickup</button>
+            <button onclick="switchSubTab('pickups', 'status')" class="tab-btn-pickups px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-pickups-status">Pickup Status</button>
+          </div>
+
+          <div id="subtab-pickups-today" class="subtab-view-pickups space-y-6">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
+              <h3 class="text-sm font-bold mb-4 uppercase">Today's Collection Schedules</h3>
+              <div class="p-4 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800 text-xs">
+                <div class="flex justify-between items-center">
+                  <div>
+                    <h4 class="font-bold text-slate-800 dark:text-slate-200">#PCK-102 (John Doe)</h4>
+                    <span class="text-[10px] text-slate-450 block mt-0.5">Time: 10:00 AM - 12:00 PM | Bags: 2</span>
+                  </div>
+                  <span class="px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-brand-50 dark:bg-brand-950/20 text-brand-600 dark:text-brand-400">Assigned: Courier Alpha</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="subtab-pickups-upcoming" class="subtab-view-pickups space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Upcoming days logistics</h4></div></div>
+          <div id="subtab-pickups-slots" class="subtab-view-pickups space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Time slots capacity configurations</h4></div></div>
+          <div id="subtab-pickups-assign" class="subtab-view-pickups space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Assign couriers to pickup routes</h4></div></div>
+          <div id="subtab-pickups-status" class="subtab-view-pickups space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Active collection route progress</h4></div></div>
+
+        </div>
+
+        <!-- ================= SCREEN 5: DELIVERY MANAGEMENT ================= -->
+        <div id="screen-deliveries" class="space-y-6 screen-panel hidden text-start">
+          
+          <div class="flex flex-wrap border-b border-slate-200 dark:border-slate-800">
+            <button onclick="switchSubTab('deliveries', 'today')" class="tab-btn-deliveries px-5 py-3 text-xs font-bold text-brand-600 dark:text-brand-400 border-b-2 border-brand-500 bg-slate-100/50 dark:bg-slate-900/30" id="tab-deliveries-today">Today's Deliveries</button>
+            <button onclick="switchSubTab('deliveries', 'upcoming')" class="tab-btn-deliveries px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-deliveries-upcoming">Upcoming Deliveries</button>
+            <button onclick="switchSubTab('deliveries', 'assign')" class="tab-btn-deliveries px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-deliveries-assign">Assign Delivery</button>
+            <button onclick="switchSubTab('deliveries', 'status')" class="tab-btn-deliveries px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-deliveries-status">Delivery Status</button>
+            <button onclick="switchSubTab('deliveries', 'completed')" class="tab-btn-deliveries px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-deliveries-completed">Completed Deliveries</button>
+          </div>
+
+          <div id="subtab-deliveries-today" class="subtab-view-deliveries space-y-6">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 rounded-3xl shadow-sm">
+              <h3 class="text-sm font-bold mb-4 uppercase">Today's Out-for-Delivery list</h3>
+              <div class="p-4 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800 text-xs">
+                <div class="flex justify-between items-center">
+                  <div>
+                    <h4 class="font-bold text-slate-850 dark:text-slate-205">#DLV-853 (Jane Doe)</h4>
+                    <span class="text-[10px] text-slate-450 block mt-0.5">Address: 204 Zion Road, Sector A</span>
+                  </div>
+                  <span class="px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-brand-500/10 text-brand-600 dark:text-brand-400">In Transit</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="subtab-deliveries-upcoming" class="subtab-view-deliveries space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Upcoming delivery schedules</h4></div></div>
+          <div id="subtab-deliveries-assign" class="subtab-view-deliveries space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Assign delivery runs to couriers</h4></div></div>
+          <div id="subtab-deliveries-status" class="subtab-view-tracking space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Live transit tracking</h4></div></div>
+          <div id="subtab-deliveries-completed" class="subtab-view-deliveries space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Delivered archives logs</h4></div></div>
+
+        </div>
+
+        <!-- ================= SCREEN 6: SERVICE MANAGEMENT ================= -->
+        <div id="screen-services" class="space-y-6 screen-panel hidden text-start">
+          
+          <div class="flex flex-wrap border-b border-slate-200 dark:border-slate-800">
+            <button onclick="switchSubTab('services', 'add')" class="tab-btn-services px-5 py-3 text-xs font-bold text-brand-600 dark:text-brand-400 border-b-2 border-brand-500 bg-slate-100/50 dark:bg-slate-900/30" id="tab-services-add">Add Service</button>
+            <button onclick="switchSubTab('services', 'view')" class="tab-btn-services px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-services-view">View Services</button>
+            <button onclick="switchSubTab('services', 'edit')" class="tab-btn-services px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-services-edit">Edit Service</button>
+            <button onclick="switchSubTab('services', 'delete')" class="tab-btn-services px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-services-delete">Delete Service</button>
+            <button onclick="switchSubTab('services', 'wash-fold')" class="tab-btn-services px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-services-wash-fold">Wash & Fold</button>
+            <button onclick="switchSubTab('services', 'dry-cleaning')" class="tab-btn-services px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-services-dry-cleaning">Dry Cleaning</button>
+            <button onclick="switchSubTab('services', 'steam-press')" class="tab-btn-services px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-services-steam-press">Steam Press</button>
+            <button onclick="switchSubTab('services', 'leather')" class="tab-btn-services px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-services-leather">Leather Care</button>
+            <button onclick="switchSubTab('services', 'delicate')" class="tab-btn-services px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-services-delicate">Delicate Fabric Care</button>
+          </div>
+
+          <!-- Add Service Form -->
+          <div id="subtab-services-add" class="subtab-view-services space-y-6">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 rounded-3xl max-w-xl mx-auto">
+              <h3 class="text-sm font-extrabold mb-4 uppercase">Create New Service</h3>
+              <form class="space-y-4" onsubmit="event.preventDefault(); addNewService();">
+                <div class="space-y-1">
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase">Service Name</label>
+                  <input type="text" id="srv-name" required class="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:ring-1 focus:ring-brand-500" />
+                </div>
+                <div class="space-y-1">
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase">Base Cost ($)</label>
+                  <input type="number" id="srv-cost" required class="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:ring-1 focus:ring-brand-500" />
+                </div>
+                <button type="submit" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold transition-all shadow-md">Add Service Type</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- View Services -->
+          <div id="subtab-services-view" class="subtab-view-services space-y-6 hidden">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm overflow-x-auto">
+              <table class="w-full text-xs text-start border-collapse">
+                <thead>
+                  <tr class="border-b border-slate-100 dark:border-slate-800 text-slate-400">
+                    <th class="py-3 text-start font-bold">Service</th>
+                    <th class="py-3 text-start font-bold">Category</th>
+                    <th class="py-3 text-start font-bold">Base Charge</th>
+                  </tr>
+                </thead>
+                <tbody id="services-table-body" class="divide-y divide-slate-50 dark:divide-slate-800">
+                  <tr>
+                    <td class="py-4 font-bold text-slate-800 dark:text-slate-200">Wash & Fold</td>
+                    <td class="py-4 font-semibold text-slate-500">Everyday cotton</td>
+                    <td class="py-4 font-bold text-brand-600">$12.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="subtab-services-edit" class="subtab-view-services space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Edit Service details</h4></div></div>
+          <div id="subtab-services-delete" class="subtab-view-services space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Delete Service Type</h4></div></div>
+          <div id="subtab-services-wash-fold" class="subtab-view-services space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Wash & Fold configuration</h4></div></div>
+          <div id="subtab-services-dry-cleaning" class="subtab-view-services space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Dry Cleaning parameters</h4></div></div>
+          <div id="subtab-services-steam-press" class="subtab-view-services space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Steam press thermal configs</h4></div></div>
+          <div id="subtab-services-leather" class="subtab-view-services space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Leather conditioning configs</h4></div></div>
+          <div id="subtab-services-delicate" class="subtab-view-services space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Delicate care rules</h4></div></div>
+
+        </div>
+
+        <!-- ================= SCREEN 7: PRICING MANAGEMENT ================= -->
+        <div id="screen-pricing" class="space-y-6 screen-panel hidden text-start">
+          
+          <div class="flex flex-wrap border-b border-slate-200 dark:border-slate-800">
+            <button onclick="switchSubTab('pricing', 'item')" class="tab-btn-pricing px-5 py-3 text-xs font-bold text-brand-600 dark:text-brand-400 border-b-2 border-brand-500 bg-slate-100/50 dark:bg-slate-900/30" id="tab-pricing-item">Per Item Pricing</button>
+            <button onclick="switchSubTab('pricing', 'kg')" class="tab-btn-pricing px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-pricing-kg">Per KG Pricing</button>
+            <button onclick="switchSubTab('pricing', 'add')" class="tab-btn-pricing px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-pricing-add">Add Pricing</button>
+            <button onclick="switchSubTab('pricing', 'edit')" class="tab-btn-pricing px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-pricing-edit">Edit Pricing</button>
+            <button onclick="switchSubTab('pricing', 'delete')" class="tab-btn-pricing px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-pricing-delete">Delete Pricing</button>
+          </div>
+
+          <div id="subtab-pricing-item" class="subtab-view-pricing space-y-6">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 rounded-3xl shadow-sm">
+              <h3 class="text-sm font-bold mb-4 uppercase">Garments Itemized Pricing</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="p-4 bg-slate-50 dark:bg-slate-900/50 rounded-2xl flex justify-between">
+                  <span>Shirts / Tops</span><span class="font-bold text-brand-600">$4.50 / Unit</span>
+                </div>
+                <div class="p-4 bg-slate-50 dark:bg-slate-900/50 rounded-2xl flex justify-between">
+                  <span>Jackets / Suit Coats</span><span class="font-bold text-brand-600">$12.00 / Unit</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="subtab-pricing-kg" class="subtab-view-pricing space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Bulk Laundry weight tiers ($2.50 / KG)</h4></div></div>
+          <div id="subtab-pricing-add" class="subtab-view-pricing space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Insert new pricing parameter</h4></div></div>
+          <div id="subtab-pricing-edit" class="subtab-view-pricing space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Update pricing thresholds</h4></div></div>
+          <div id="subtab-pricing-delete" class="subtab-view-pricing space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Delete price point</h4></div></div>
+
+        </div>
+
+        <!-- ================= SCREEN 8: BILLING MANAGEMENT ================= -->
+        <div id="screen-billing" class="space-y-6 screen-panel hidden text-start">
+          
+          <div class="flex flex-wrap border-b border-slate-200 dark:border-slate-800">
+            <button onclick="switchSubTab('billing', 'all')" class="tab-btn-billing px-5 py-3 text-xs font-bold text-brand-600 dark:text-brand-400 border-b-2 border-brand-500 bg-slate-100/50 dark:bg-slate-900/30" id="tab-billing-all">All Bills</button>
+            <button onclick="switchSubTab('billing', 'order-wise')" class="tab-btn-billing px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-billing-order-wise">Order-wise Billing</button>
+            <button onclick="switchSubTab('billing', 'generate')" class="tab-btn-billing px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-billing-generate">Generate Invoice</button>
+            <button onclick="switchSubTab('billing', 'view')" class="tab-btn-billing px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-billing-view">View Invoice</button>
+            <button onclick="switchSubTab('billing', 'download')" class="tab-btn-billing px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-billing-download">Download Invoice</button>
+          </div>
+
+          <div id="subtab-billing-all" class="subtab-view-billing space-y-6">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 rounded-3xl shadow-sm">
+              <h3 class="text-sm font-bold mb-4 uppercase">Past generated billing files</h3>
+              <div class="flex justify-between items-center text-xs p-3.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 rounded-2xl">
+                <div>
+                  <h4 class="font-bold text-slate-800 dark:text-slate-200">#INV-9482</h4>
+                  <span class="text-[10px] text-slate-450 block">Customer: John Doe | Value: $24.00</span>
+                </div>
+                <button onclick="alert('Downloading invoice INV-9482...')" class="px-3.5 py-2 bg-brand-600 text-white font-bold rounded-xl hover:bg-brand-700">Get PDF</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="subtab-billing-order-wise" class="subtab-view-billing space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Order-based invoice breakdown logs</h4></div></div>
+          <div id="subtab-billing-generate" class="subtab-view-billing space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Generate new receipt module</h4></div></div>
+          <div id="subtab-billing-view" class="subtab-view-billing space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Interactive HTML invoice sheet</h4></div></div>
+          <div id="subtab-billing-download" class="subtab-view-billing space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Direct PDF export pipeline</h4></div></div>
+
+        </div>
+
+        <!-- ================= SCREEN 9: PAYMENT MANAGEMENT ================= -->
+        <div id="screen-payments" class="space-y-6 screen-panel hidden text-start">
+          
+          <div class="flex flex-wrap border-b border-slate-200 dark:border-slate-800">
+            <button onclick="switchSubTab('payments', 'all')" class="tab-btn-payments px-5 py-3 text-xs font-bold text-brand-600 dark:text-brand-400 border-b-2 border-brand-500 bg-slate-100/50 dark:bg-slate-900/30" id="tab-payments-all">All Payments</button>
+            <button onclick="switchSubTab('payments', 'successful')" class="tab-btn-payments px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-payments-successful">Successful Payments</button>
+            <button onclick="switchSubTab('payments', 'pending')" class="tab-btn-payments px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-payments-pending">Pending Payments</button>
+            <button onclick="switchSubTab('payments', 'failed')" class="tab-btn-payments px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-payments-failed">Failed Payments</button>
+            <button onclick="switchSubTab('payments', 'refunds')" class="tab-btn-payments px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-payments-refunds">Refunds</button>
+            <button onclick="switchSubTab('payments', 'revenue')" class="tab-btn-payments px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-payments-revenue">Revenue Reports</button>
+          </div>
+
+          <div id="subtab-payments-all" class="subtab-view-payments space-y-6">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 rounded-3xl shadow-sm">
+              <h3 class="text-sm font-bold mb-4 uppercase">Transaction Ledger</h3>
+              <div class="p-3.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 rounded-2xl text-xs flex justify-between items-center">
+                <div>
+                  <span class="block text-[9px] text-slate-400 uppercase font-bold">Aug 25, 2026 - INV-9482</span>
+                  <span class="font-bold text-slate-850 dark:text-slate-100">John Doe (Credit Card)</span>
+                </div>
+                <span class="font-extrabold text-emerald-500">+$24.00</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="subtab-payments-successful" class="subtab-view-payments space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Settled transaction logs</h4></div></div>
+          <div id="subtab-payments-pending" class="subtab-view-payments space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Outstanding balances queue</h4></div></div>
+          <div id="subtab-payments-failed" class="subtab-view-payments space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Declined card logs</h4></div></div>
+          <div id="subtab-payments-refunds" class="subtab-view-payments space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Refund processing controls</h4></div></div>
+          <div id="subtab-payments-revenue" class="subtab-view-payments space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Revenue statistics metrics</h4></div></div>
+
+        </div>
+
+        <!-- ================= SCREEN 10: COVERAGE AREA ================= -->
+        <div id="screen-coverage" class="space-y-6 screen-panel hidden text-start">
+          
+          <div class="flex flex-wrap border-b border-slate-200 dark:border-slate-800">
+            <button onclick="switchSubTab('coverage', 'add')" class="tab-btn-coverage px-5 py-3 text-xs font-bold text-brand-600 dark:text-brand-400 border-b-2 border-brand-500 bg-slate-100/50 dark:bg-slate-900/30" id="tab-coverage-add">Add Pincode</button>
+            <button onclick="switchSubTab('coverage', 'view')" class="tab-btn-coverage px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-coverage-view">View Pincodes</button>
+            <button onclick="switchSubTab('coverage', 'edit')" class="tab-btn-coverage px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-coverage-edit">Edit Pincode</button>
+            <button onclick="switchSubTab('coverage', 'toggle')" class="tab-btn-coverage px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-coverage-toggle">Enable / Disable Area</button>
+            <button onclick="switchSubTab('coverage', 'delete')" class="tab-btn-coverage px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-coverage-delete">Delete Pincode</button>
+          </div>
+
+          <div id="subtab-coverage-add" class="subtab-view-coverage space-y-6">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 rounded-3xl max-w-xl mx-auto">
+              <h3 class="text-sm font-extrabold mb-4 uppercase">Register Serviced Pincode</h3>
+              <form class="space-y-4" onsubmit="event.preventDefault(); addNewPincode();">
+                <div class="space-y-1">
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase">Pincode / Zipcode</label>
+                  <input type="text" id="pin-code" required class="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:ring-1 focus:ring-brand-500" />
+                </div>
+                <button type="submit" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold transition-all shadow-md">Add Pincode</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- View Pincodes -->
+          <div id="subtab-coverage-view" class="subtab-view-coverage space-y-6 hidden">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm overflow-x-auto">
+              <table class="w-full text-xs text-start border-collapse">
+                <thead>
+                  <tr class="border-b border-slate-100 dark:border-slate-800 text-slate-400">
+                    <th class="py-3 text-start font-bold">Pincode</th>
+                    <th class="py-3 text-start font-bold">Region Status</th>
+                  </tr>
+                </thead>
+                <tbody id="pincodes-table-body" class="divide-y divide-slate-50 dark:divide-slate-800">
+                  <tr>
+                    <td class="py-4 font-bold text-slate-850 dark:text-slate-200">110022</td>
+                    <td class="py-4 font-bold text-emerald-500">Serviced</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="subtab-coverage-edit" class="subtab-view-coverage space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Edit coverage zone boundary</h4></div></div>
+          <div id="subtab-coverage-toggle" class="subtab-view-coverage space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Enable/Disable active coverage zones</h4></div></div>
+          <div id="subtab-coverage-delete" class="subtab-view-coverage space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Delete pincode configurations</h4></div></div>
+
+        </div>
+
+        <!-- ================= SCREEN 11: NOTIFICATIONS ================= -->
+        <div id="screen-notifications" class="space-y-6 screen-panel hidden text-start">
+          
+          <div class="flex flex-wrap border-b border-slate-200 dark:border-slate-800">
+            <button onclick="switchSubTab('notifications', 'pickup')" class="tab-btn-notifications px-5 py-3 text-xs font-bold text-brand-600 dark:text-brand-400 border-b-2 border-brand-500 bg-slate-100/50 dark:bg-slate-900/30" id="tab-notifications-pickup">Pickup Notifications</button>
+            <button onclick="switchSubTab('notifications', 'status')" class="tab-btn-notifications px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-notifications-status">Order Status Notifications</button>
+            <button onclick="switchSubTab('notifications', 'delivery')" class="tab-btn-notifications px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-notifications-delivery">Delivery Notifications</button>
+            <button onclick="switchSubTab('notifications', 'payment')" class="tab-btn-notifications px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-notifications-payment">Payment Notifications</button>
+            <button onclick="switchSubTab('notifications', 'custom')" class="tab-btn-notifications px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-notifications-custom">Send Custom Notification</button>
+          </div>
+
+          <div id="subtab-notifications-pickup" class="subtab-view-notifications space-y-6">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 rounded-3xl shadow-sm">
+              <h3 class="text-sm font-bold mb-4 uppercase">Automated Pickup SMS / Emails</h3>
+              <div class="p-3.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 rounded-2xl text-xs space-y-1">
+                <span class="block text-[9px] text-slate-400 font-bold uppercase">Template: Pickup Assigned</span>
+                <p class="font-semibold text-slate-700 dark:text-slate-350">"Hello [Name], courier [Courier] is assigned to collect your laundry garments today."</p>
+              </div>
+            </div>
+          </div>
+
+          <div id="subtab-notifications-status" class="subtab-view-notifications space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Wash cycles transitions alerts templates</h4></div></div>
+          <div id="subtab-notifications-delivery" class="subtab-view-notifications space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Dispatch & routing completion alerts</h4></div></div>
+          <div id="subtab-notifications-payment" class="subtab-view-notifications space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Receipt notifications configurations</h4></div></div>
+          
+          <div id="subtab-notifications-custom" class="subtab-view-notifications space-y-6 hidden">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 rounded-3xl max-w-xl mx-auto">
+              <h3 class="text-sm font-extrabold mb-4 uppercase">Direct Broadcast message</h3>
+              <form class="space-y-4" onsubmit="event.preventDefault(); alert('Custom broadcast sent!');">
+                <div class="space-y-1">
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase">Target User ID</label>
+                  <input type="text" placeholder="#CST-102" required class="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100" />
+                </div>
+                <div class="space-y-1">
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase">Message Content</label>
+                  <textarea rows="3" placeholder="Write custom SMS alert..." required class="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold transition-all shadow-md">Broadcast SMS Alert</button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ================= SCREEN 12: REPORTS ================= -->
+        <div id="screen-reports" class="space-y-6 screen-panel hidden text-start">
+          
+          <div class="flex flex-wrap border-b border-slate-200 dark:border-slate-800">
+            <button onclick="switchSubTab('reports', 'customer')" class="tab-btn-reports px-5 py-3 text-xs font-bold text-brand-600 dark:text-brand-400 border-b-2 border-brand-500 bg-slate-100/50 dark:bg-slate-900/30" id="tab-reports-customer">Customer Reports</button>
+            <button onclick="switchSubTab('reports', 'order')" class="tab-btn-reports px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-reports-order">Order Reports</button>
+            <button onclick="switchSubTab('reports', 'pickup')" class="tab-btn-reports px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-reports-pickup">Pickup Reports</button>
+            <button onclick="switchSubTab('reports', 'delivery')" class="tab-btn-reports px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-reports-delivery">Delivery Reports</button>
+            <button onclick="switchSubTab('reports', 'service')" class="tab-btn-reports px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-reports-service">Service Reports</button>
+            <button onclick="switchSubTab('reports', 'payment')" class="tab-btn-reports px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-reports-payment">Payment Reports</button>
+            <button onclick="switchSubTab('reports', 'revenue')" class="tab-btn-reports px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white" id="tab-reports-revenue">Revenue Reports</button>
+          </div>
+
+          <div id="subtab-reports-customer" class="subtab-view-reports space-y-6">
+            <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 rounded-3xl shadow-sm space-y-4">
+              <h3 class="text-sm font-bold mb-2 uppercase">Analytical Summaries</h3>
+              <p class="text-xs text-slate-500">Generate CSV exports of user demographic patterns and monthly metrics.</p>
+              <button onclick="alert('Exporting customer database CSV...')" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold shadow-sm">Export Customers Database (CSV)</button>
+            </div>
+          </div>
+
+          <div id="subtab-reports-order" class="subtab-view-reports space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Garment orders throughput rate reports</h4></div></div>
+          <div id="subtab-reports-pickup" class="subtab-view-reports space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Courier pickups response times archives</h4></div></div>
+          <div id="subtab-reports-delivery" class="subtab-view-reports space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Delivery route transit durations</h4></div></div>
+          <div id="subtab-reports-service" class="subtab-view-reports space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Dry cleaning vs Wash & Fold volume metrics</h4></div></div>
+          <div id="subtab-reports-payment" class="subtab-view-reports space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Billing transactions reports</h4></div></div>
+          <div id="subtab-reports-revenue" class="subtab-view-reports space-y-6 hidden"><div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6"><h4 class="text-sm font-bold">Gross revenue analytics logs</h4></div></div>
+
+        </div>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <!-- INTERACTIVE ROUTERS -->
+  <script>
+    // Mobile sidebar toggle drawer logic
+    function toggleMobileSidebar(open) {
+      const panel = document.getElementById('sidebar-panel');
+      const backdrop = document.getElementById('sidebar-backdrop');
+      if (open) {
+        backdrop.classList.remove('hidden');
+        setTimeout(() => {
+          panel.classList.remove('translate-x-full');
+          backdrop.classList.remove('opacity-0');
+          backdrop.classList.add('opacity-100');
+        }, 20);
+      } else {
+        panel.classList.add('translate-x-full');
+        backdrop.classList.remove('opacity-100');
+        backdrop.classList.add('opacity-0');
+        setTimeout(() => {
+          backdrop.classList.add('hidden');
+        }, 300);
+      }
+    }
+
+    // Screen switcher routing
+    function switchScreen(screenId, pathTitle, activeNavId) {
+      // Auto close sidebar on mobile views
+      toggleMobileSidebar(false);
+
+      // Hide all main panels
+      document.querySelectorAll('.screen-panel').forEach(panel => {
+        panel.classList.add('hidden');
+      });
+      // Show active panel
+      document.getElementById('screen-' + screenId).classList.remove('hidden');
+      // Update breadcrumbs
+      document.getElementById('breadcrumb-text').textContent = pathTitle;
+
+      // Update sidebar nav highlighting (Solid Left Border visual design)
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.className = 'nav-item w-full flex items-center gap-3 px-6 py-3.5 text-xs font-bold transition-all duration-150 border-s-4 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900/30';
+        const icon = item.querySelector('.nav-icon');
+        if (icon) {
+          icon.className = 'w-4 h-4 nav-icon text-slate-400';
+        }
+      });
+
+      const activeNav = document.getElementById(activeNavId);
+      if (activeNav) {
+        activeNav.className = 'nav-item w-full flex items-center gap-3 px-6 py-3.5 text-xs font-bold transition-all duration-150 border-s-4 border-brand-500 bg-brand-50/50 dark:bg-brand-950/20 text-brand-600 dark:text-brand-400';
+        const icon = activeNav.querySelector('.nav-icon');
+        if (icon) {
+          icon.className = 'w-4 h-4 nav-icon text-brand-500';
+        }
+      }
+    }
+
+    // Viewport subtab routing logic (Outline border-bottom active design)
+    function switchSubTab(screenName, subTabId) {
+      // Hide all subtab views inside this screen
+      document.querySelectorAll('.subtab-view-' + screenName).forEach(view => {
+        view.classList.add('hidden');
+      });
+      // Show targeted subtab view
+      document.getElementById('subtab-' + screenName + '-' + subTabId).classList.remove('hidden');
+
+      // Update subtab button states
+      document.querySelectorAll('.tab-btn-' + screenName).forEach(btn => {
+        btn.className = 'tab-btn-' + screenName + ' px-5 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white';
+      });
+
+      const activeBtn = document.getElementById('tab-' + screenName + '-' + subTabId);
+      if (activeBtn) {
+        activeBtn.className = 'tab-btn-' + screenName + ' px-5 py-3 text-xs font-bold text-brand-600 dark:text-brand-400 border-b-2 border-brand-500 bg-slate-100/50 dark:bg-slate-900/30';
+      }
+    }
+
+    // Dynamic database additions for demonstration
+    function addNewCustomer() {
+      const name = document.getElementById('cust-name').value;
+      const email = document.getElementById('cust-email').value;
+      if (!name || !email) return;
+
+      const tbody = document.getElementById('customers-table-body');
+      const id = '#CST-' + Math.floor(100 + Math.random() * 900);
+      
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="py-4 font-bold text-brand-600">${id}</td>
+        <td class="py-4 font-semibold text-slate-800 dark:text-slate-200">${name}</td>
+        <td class="py-4 text-slate-500">${email}</td>
+        <td class="py-4"><span class="px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400">Active</span></td>
+      `;
+      tbody.appendChild(tr);
+      
+      alert('Registered new customer account successfully! ID: ' + id);
+      document.getElementById('cust-name').value = '';
+      document.getElementById('cust-email').value = '';
+      switchSubTab('customers', 'view');
+    }
+
+    function addNewService() {
+      const name = document.getElementById('srv-name').value;
+      const cost = parseFloat(document.getElementById('srv-cost').value || 0).toFixed(2);
+      if (!name || !cost) return;
+
+      const tbody = document.getElementById('services-table-body');
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="py-4 font-bold text-slate-800 dark:text-slate-200">${name}</td>
+        <td class="py-4 font-semibold text-slate-500">Custom services configs</td>
+        <td class="py-4 font-bold text-brand-600">$${cost}</td>
+      `;
+      tbody.appendChild(tr);
+
+      alert('Added service type: ' + name);
+      document.getElementById('srv-name').value = '';
+      document.getElementById('srv-cost').value = '';
+      switchSubTab('services', 'view');
+    }
+
+    function addNewPincode() {
+      const pin = document.getElementById('pin-code').value;
+      if (!pin) return;
+
+      const tbody = document.getElementById('pincodes-table-body');
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="py-4 font-bold text-slate-850 dark:text-slate-200">${pin}</td>
+        <td class="py-4 font-bold text-emerald-500">Serviced</td>
+      `;
+      tbody.appendChild(tr);
+
+      alert('Coverage expanded to pincode: ' + pin);
+      document.getElementById('pin-code').value = '';
+      switchSubTab('coverage', 'view');
+    }
+
+    // Theme and RTL Mode Toggling
+    const darkBtn = document.getElementById('dark-mode-btn');
+    const rtlBtn = document.getElementById('rtl-mode-btn');
+
+    darkBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    rtlBtn.addEventListener('click', () => {
+      const isRtl = document.documentElement.getAttribute('dir') === 'rtl';
+      const newDir = isRtl ? 'ltr' : 'rtl';
+      document.documentElement.setAttribute('dir', newDir);
+      localStorage.setItem('rtl', newDir);
+    });
+
+    // User Profile Dropdown logic
+    const userBtn = document.getElementById("user-dropdown-btn");
+    const userMenu = document.getElementById("user-dropdown-menu");
+    const userChevron = document.getElementById("user-dropdown-chevron");
+
+    window.toggleUserDropdown = function(event) {
+      event.stopPropagation();
+      const isOpen = userBtn.getAttribute("aria-expanded") === "true";
+      if (isOpen) {
+        closeUserDropdown();
+      } else {
+        openUserDropdown();
+      }
+    };
+
+    window.openUserDropdown = function() {
+      userMenu.classList.remove("opacity-0", "invisible", "scale-95");
+      userMenu.classList.add("opacity-100", "visible", "scale-100");
+      userBtn.setAttribute("aria-expanded", "true");
+      userChevron.classList.add("rotate-180");
+    };
+
+    window.closeUserDropdown = function() {
+      userMenu.classList.add("opacity-0", "invisible", "scale-95");
+      userMenu.classList.remove("opacity-100", "visible", "scale-100");
+      userBtn.setAttribute("aria-expanded", "false");
+      userChevron.classList.remove("rotate-180");
+    };
+
+    // Click outside to close user dropdown
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest("#user-dropdown-wrapper")) {
+        closeUserDropdown();
+      }
+    });
+  </script>
+
+</body>
+</html>
