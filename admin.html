@@ -494,21 +494,21 @@
           <!-- View Customers Table -->
           <div id="subtab-customers-view" class="subtab-view-customers space-y-6 hidden">
             <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm overflow-x-auto">
-              <table class="w-full text-xs text-start border-collapse">
+              <table class="w-full min-w-[600px] text-xs text-start border-collapse">
                 <thead>
                   <tr class="border-b border-slate-100 dark:border-slate-800 text-slate-400">
-                    <th class="py-3 text-start font-bold">ID</th>
-                    <th class="py-3 text-start font-bold">Name</th>
-                    <th class="py-3 text-start font-bold">Email</th>
-                    <th class="py-3 text-start font-bold">Status</th>
+                    <th class="px-4 py-3 text-start font-bold whitespace-nowrap">ID</th>
+                    <th class="px-4 py-3 text-start font-bold whitespace-nowrap">Name</th>
+                    <th class="px-4 py-3 text-start font-bold whitespace-nowrap">Email</th>
+                    <th class="px-4 py-3 text-start font-bold whitespace-nowrap">Status</th>
                   </tr>
                 </thead>
                 <tbody id="customers-table-body" class="divide-y divide-slate-50 dark:divide-slate-800">
                   <tr>
-                    <td class="py-4 font-bold text-brand-600">#CST-102</td>
-                    <td class="py-4 font-semibold text-slate-800 dark:text-slate-200">John Doe</td>
-                    <td class="py-4 text-slate-500">john.doe@matrix.com</td>
-                    <td class="py-4"><span class="px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400">Active</span></td>
+                    <td class="px-4 py-4 font-bold text-brand-600 whitespace-nowrap">#CST-102</td>
+                    <td class="px-4 py-4 font-semibold text-slate-800 dark:text-slate-200 whitespace-nowrap">John Doe</td>
+                    <td class="px-4 py-4 text-slate-500 whitespace-nowrap">john.doe@matrix.com</td>
+                    <td class="px-4 py-4 whitespace-nowrap"><span class="px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400">Active</span></td>
                   </tr>
                 </tbody>
               </table>
@@ -539,23 +539,23 @@
 
           <div id="subtab-orders-all" class="subtab-view-orders space-y-6">
             <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm overflow-x-auto">
-              <table class="w-full text-xs text-start border-collapse">
+              <table class="w-full min-w-[600px] text-xs text-start border-collapse">
                 <thead>
                   <tr class="border-b border-slate-100 dark:border-slate-800 text-slate-400">
-                    <th class="py-3 text-start font-bold">Order ID</th>
-                    <th class="py-3 text-start font-bold">Customer</th>
-                    <th class="py-3 text-start font-bold">Services</th>
-                    <th class="py-3 text-start font-bold">Grand Total</th>
-                    <th class="py-3 text-start font-bold">Status</th>
+                    <th class="px-4 py-3 text-start font-bold whitespace-nowrap">Order ID</th>
+                    <th class="px-4 py-3 text-start font-bold whitespace-nowrap">Customer</th>
+                    <th class="px-4 py-3 text-start font-bold whitespace-nowrap">Services</th>
+                    <th class="px-4 py-3 text-start font-bold whitespace-nowrap">Grand Total</th>
+                    <th class="px-4 py-3 text-start font-bold whitespace-nowrap">Status</th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-50 dark:divide-slate-800">
                   <tr>
-                    <td class="py-4 font-bold text-brand-600">#ORD-9482</td>
-                    <td class="py-4 font-semibold">John Doe</td>
-                    <td class="py-4 text-slate-500">Wash & Fold</td>
-                    <td class="py-4 font-bold">$24.00</td>
-                    <td class="py-4"><span class="px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-brand-50 dark:bg-brand-950/20 text-brand-500">In Cleaning</span></td>
+                    <td class="px-4 py-4 font-bold text-brand-600 whitespace-nowrap">#ORD-9482</td>
+                    <td class="px-4 py-4 font-semibold whitespace-nowrap">John Doe</td>
+                    <td class="px-4 py-4 text-slate-500 whitespace-nowrap">Wash & Fold</td>
+                    <td class="px-4 py-4 font-bold whitespace-nowrap">$24.00</td>
+                    <td class="px-4 py-4 whitespace-nowrap"><span class="px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-brand-50 dark:bg-brand-950/20 text-brand-500">In Cleaning</span></td>
                   </tr>
                 </tbody>
               </table>
@@ -588,12 +588,12 @@
             <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
               <h3 class="text-sm font-bold mb-4 uppercase">Today's Collection Schedules</h3>
               <div class="p-4 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800 text-xs">
-                <div class="flex justify-between items-center">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                   <div>
                     <h4 class="font-bold text-slate-800 dark:text-slate-200">#PCK-102 (John Doe)</h4>
                     <span class="text-[10px] text-slate-400 block mt-0.5">Time: 10:00 AM - 12:00 PM | Bags: 2</span>
                   </div>
-                  <span class="px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-brand-50 dark:bg-brand-950/20 text-brand-600 dark:text-brand-400">Assigned: Courier Alpha</span>
+                  <span class="px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-brand-50 dark:bg-brand-950/20 text-brand-600 dark:text-brand-400 shrink-0">Assigned: Courier Alpha</span>
                 </div>
               </div>
             </div>
@@ -675,19 +675,19 @@
           <!-- View Services -->
           <div id="subtab-services-view" class="subtab-view-services space-y-6 hidden">
             <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm overflow-x-auto">
-              <table class="w-full text-xs text-start border-collapse">
+              <table class="w-full min-w-[600px] text-xs text-start border-collapse">
                 <thead>
                   <tr class="border-b border-slate-100 dark:border-slate-800 text-slate-400">
-                    <th class="py-3 text-start font-bold">Service</th>
-                    <th class="py-3 text-start font-bold">Category</th>
-                    <th class="py-3 text-start font-bold">Base Charge</th>
+                    <th class="px-4 py-3 text-start font-bold whitespace-nowrap">Service</th>
+                    <th class="px-4 py-3 text-start font-bold whitespace-nowrap">Category</th>
+                    <th class="px-4 py-3 text-start font-bold whitespace-nowrap">Base Charge</th>
                   </tr>
                 </thead>
                 <tbody id="services-table-body" class="divide-y divide-slate-50 dark:divide-slate-800">
                   <tr>
-                    <td class="py-4 font-bold text-slate-800 dark:text-slate-200">Wash & Fold</td>
-                    <td class="py-4 font-semibold text-slate-500">Everyday cotton</td>
-                    <td class="py-4 font-bold text-brand-600">$12.00</td>
+                    <td class="px-4 py-4 font-bold text-slate-800 dark:text-slate-200 whitespace-nowrap">Wash & Fold</td>
+                    <td class="px-4 py-4 font-semibold text-slate-500 whitespace-nowrap">Everyday cotton</td>
+                    <td class="px-4 py-4 font-bold text-brand-600 whitespace-nowrap">$12.00</td>
                   </tr>
                 </tbody>
               </table>
@@ -750,12 +750,12 @@
           <div id="subtab-billing-all" class="subtab-view-billing space-y-6">
             <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 rounded-3xl shadow-sm">
               <h3 class="text-sm font-bold mb-4 uppercase">Past generated billing files</h3>
-              <div class="flex justify-between items-center text-xs p-3.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 rounded-2xl">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs p-3.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 rounded-2xl">
                 <div>
                   <h4 class="font-bold text-slate-800 dark:text-slate-200">#INV-9482</h4>
                   <span class="text-[10px] text-slate-400 block">Customer: John Doe | Value: $24.00</span>
                 </div>
-                <button onclick="alert('Downloading invoice INV-9482...')" class="px-3.5 py-2 bg-brand-600 text-white font-bold rounded-xl hover:bg-brand-700">Get PDF</button>
+                <button onclick="alert('Downloading invoice INV-9482...')" class="w-full sm:w-auto text-center shrink-0 px-3.5 py-2 bg-brand-600 text-white font-bold rounded-xl hover:bg-brand-700">Get PDF</button>
               </div>
             </div>
           </div>
@@ -827,17 +827,17 @@
           <!-- View Pincodes -->
           <div id="subtab-coverage-view" class="subtab-view-coverage space-y-6 hidden">
             <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm overflow-x-auto">
-              <table class="w-full text-xs text-start border-collapse">
+              <table class="w-full min-w-[600px] text-xs text-start border-collapse">
                 <thead>
                   <tr class="border-b border-slate-100 dark:border-slate-800 text-slate-400">
-                    <th class="py-3 text-start font-bold">Pincode</th>
-                    <th class="py-3 text-start font-bold">Region Status</th>
+                    <th class="px-4 py-3 text-start font-bold whitespace-nowrap">Pincode</th>
+                    <th class="px-4 py-3 text-start font-bold whitespace-nowrap">Region Status</th>
                   </tr>
                 </thead>
                 <tbody id="pincodes-table-body" class="divide-y divide-slate-50 dark:divide-slate-800">
                   <tr>
-                    <td class="py-4 font-bold text-slate-800 dark:text-slate-200">110022</td>
-                    <td class="py-4 font-bold text-emerald-500">Serviced</td>
+                    <td class="px-4 py-4 font-bold text-slate-800 dark:text-slate-200 whitespace-nowrap">110022</td>
+                    <td class="px-4 py-4 font-bold text-emerald-500 whitespace-nowrap">Serviced</td>
                   </tr>
                 </tbody>
               </table>
@@ -1017,10 +1017,10 @@
       
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td class="py-4 font-bold text-brand-600">${id}</td>
-        <td class="py-4 font-semibold text-slate-800 dark:text-slate-200">${name}</td>
-        <td class="py-4 text-slate-500">${email}</td>
-        <td class="py-4"><span class="px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400">Active</span></td>
+        <td class="px-4 py-4 font-bold text-brand-600 whitespace-nowrap">${id}</td>
+        <td class="px-4 py-4 font-semibold text-slate-800 dark:text-slate-200 whitespace-nowrap">${name}</td>
+        <td class="px-4 py-4 text-slate-500 whitespace-nowrap">${email}</td>
+        <td class="px-4 py-4 whitespace-nowrap"><span class="px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400">Active</span></td>
       `;
       tbody.appendChild(tr);
       
@@ -1038,9 +1038,9 @@
       const tbody = document.getElementById('services-table-body');
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td class="py-4 font-bold text-slate-800 dark:text-slate-200">${name}</td>
-        <td class="py-4 font-semibold text-slate-500">Custom services configs</td>
-        <td class="py-4 font-bold text-brand-600">$${cost}</td>
+        <td class="px-4 py-4 font-bold text-slate-800 dark:text-slate-200 whitespace-nowrap">${name}</td>
+        <td class="px-4 py-4 font-semibold text-slate-500 whitespace-nowrap">Custom services configs</td>
+        <td class="px-4 py-4 font-bold text-brand-600 whitespace-nowrap">$${cost}</td>
       `;
       tbody.appendChild(tr);
 
@@ -1057,8 +1057,8 @@
       const tbody = document.getElementById('pincodes-table-body');
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td class="py-4 font-bold text-slate-800 dark:text-slate-200">${pin}</td>
-        <td class="py-4 font-bold text-emerald-500">Serviced</td>
+        <td class="px-4 py-4 font-bold text-slate-800 dark:text-slate-200 whitespace-nowrap">${pin}</td>
+        <td class="px-4 py-4 font-bold text-emerald-500 whitespace-nowrap">Serviced</td>
       `;
       tbody.appendChild(tr);
 
