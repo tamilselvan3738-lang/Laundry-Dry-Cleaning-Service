@@ -128,21 +128,33 @@
       }
     }
   
-    /* Date picker calendar indicator visibility in dark mode */
+    
+      /* Date picker calendar indicator visibility and alignment */
     input[type="date"] {
       color-scheme: light;
     }
     .dark input[type="date"] {
       color-scheme: dark;
     }
-    .dark input[type="date"]::-webkit-calendar-picker-indicator {
-      filter: invert(1);
-      cursor: pointer;
-    }
     input[type="date"]::-webkit-calendar-picker-indicator {
       cursor: pointer;
-      padding: 2px;
-      margin-inline-end: 4px;
+      opacity: 0.7;
+      padding: 4px;
+      margin-inline-end: 6px;
+      border-radius: 6px;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    input[type="date"]::-webkit-calendar-picker-indicator:hover {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+    .dark input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: brightness(0) invert(1) !important;
+      opacity: 0.9 !important;
+    }
+    .dark input[type="date"]::-webkit-calendar-picker-indicator:hover {
+      opacity: 1 !important;
+      filter: brightness(0) invert(1) !important;
     }
   </style>
   <script>
@@ -664,7 +676,7 @@
               <div class="bg-white dark:bg-[#0b0c16] border border-slate-200 dark:border-slate-800 p-6 sm:p-8 rounded-[28px] max-w-xl mx-auto shadow-sm space-y-4">
                 <h3 class="text-base font-extrabold text-slate-800 dark:text-white">Choose Collection Date</h3>
                 <div class="space-y-2">
-                  <input type="date" id="booking-date" required class="w-full px-4 py-3 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-500 [color-scheme:light] dark:[color-scheme:dark]" />
+                  <input type="date" id="booking-date" required class="w-full ps-4 pe-10 py-3 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer" />
                 </div>
                 <button type="button" onclick="switchSubTab('schedule', 'time-slot')" class="w-full py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold">Next: Choose Time Slot &rarr;</button>
               </div>

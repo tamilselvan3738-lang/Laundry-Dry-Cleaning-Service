@@ -47,16 +47,33 @@
       visibility: visible;
     }
   
-    /* Date picker calendar indicator visibility in dark mode */
+    
+      /* Date picker calendar indicator visibility and alignment */
     input[type="date"] {
       color-scheme: light;
     }
     .dark input[type="date"] {
       color-scheme: dark;
     }
-    .dark input[type="date"]::-webkit-calendar-picker-indicator {
-      filter: invert(1);
+    input[type="date"]::-webkit-calendar-picker-indicator {
       cursor: pointer;
+      opacity: 0.7;
+      padding: 4px;
+      margin-inline-end: 6px;
+      border-radius: 6px;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    input[type="date"]::-webkit-calendar-picker-indicator:hover {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+    .dark input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: brightness(0) invert(1) !important;
+      opacity: 0.9 !important;
+    }
+    .dark input[type="date"]::-webkit-calendar-picker-indicator:hover {
+      opacity: 1 !important;
+      filter: brightness(0) invert(1) !important;
     }
   </style>
   <style>
@@ -127,17 +144,7 @@
       }
     }
   
-    /* Date picker calendar indicator visibility in dark mode */
-    input[type="date"] {
-      color-scheme: light;
-    }
-    .dark input[type="date"] {
-      color-scheme: dark;
-    }
-    .dark input[type="date"]::-webkit-calendar-picker-indicator {
-      filter: invert(1);
-      cursor: pointer;
-    }
+    
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 font-sans transition-colors duration-300 min-h-screen flex flex-col">
